@@ -112,7 +112,7 @@ export default function DisplayNameGate({ open, onDone }: Props) {
             if (e.key === "Enter") void submit();
           }}
           placeholder="e.g. Curious Builder"
-          className="mt-1 min-h-[44px] w-full rounded-lg border border-stone-300 px-3 py-2 text-base"
+          className="mt-1 min-h-[44px] w-full rounded-xl border border-zinc-200 px-3 py-2 text-base focus:border-pink focus:outline-none focus:ring-2 focus:ring-pink/20"
           autoComplete="off"
         />
         {error && (
@@ -125,7 +125,7 @@ export default function DisplayNameGate({ open, onDone }: Props) {
             type="button"
             onClick={() => void submit()}
             disabled={busy}
-            className="min-h-[44px] flex-1 rounded-full bg-primary-bright px-5 py-2.5 font-semibold text-white shadow hover:bg-primary-ink disabled:opacity-60"
+            className="min-h-[44px] flex-1 rounded-full hero-gradient-bg px-5 py-2.5 font-semibold text-white shadow hover:opacity-90 disabled:opacity-60"
           >
             {busy ? "Saving…" : "Continue"}
           </button>
@@ -133,7 +133,7 @@ export default function DisplayNameGate({ open, onDone }: Props) {
             type="button"
             onClick={() => onDone(null)}
             disabled={busy}
-            className="min-h-[44px] rounded-full border border-stone-300 px-5 py-2.5 font-semibold text-ink-soft hover:bg-stone-100 disabled:opacity-60"
+            className="min-h-[44px] rounded-full border border-zinc-200 px-5 py-2.5 font-semibold text-ink-soft hover:bg-canvas-soft disabled:opacity-60"
           >
             Cancel
           </button>

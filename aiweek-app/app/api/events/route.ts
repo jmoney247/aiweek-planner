@@ -25,7 +25,7 @@ export const dynamic = "force-dynamic";
  */
 
 const EVENT_COLUMNS =
-  "id, title, display_title, official_url, registration_url, registration_is_direct, start_at, end_at, venue, address, city, neighborhood, event_type, hosted_by, speakers, description, about, summary, image_url, image_kind, image_source_url, image_attribution, image_verified_at, image_width, image_height";
+  "id, title, display_title, official_url, registration_url, registration_is_direct, start_at, end_at, venue, address, city, neighborhood, event_type, hosted_by, speakers, description, about, summary, image_url, image_kind, image_source_url, image_attribution, image_verified_at, image_width, image_height, lat, lng";
 
 const DEFAULT_LIMIT = 50;
 const MAX_LIMIT = 100;

@@ -4,6 +4,9 @@
  */
 import type { Event, EventComment, EventStats, ReactionKind } from "@/lib/types";
 
+/** Event row returned by GET /api/events (includes denormalized stats). */
+export type EventWithStats = Event & { stats?: EventStats };
+
 async function json<T>(res: Response): Promise<T> {
   if (!res.ok) {
     let detail = "";
@@ -18,10 +21,46 @@ async function json<T>(res: Response): Promise<T> {
   return (await res.json()) as T;
 }
 
-export async function fetchEvents(limit = 200): Promise<Event[]> {
-  const res = await fetch(`/api/events?limit=${limit}`, { cache: "no-store" });
-  const data = await json<{ events: Event[] }>(res);
-  return Array.isArray(data.events) ? data.events : [];
+const PAGE_SIZE = 100;
+
+async function fetchEventsPage(
+  cursor?: string | null
+): Promise<{ events: EventWithStats[]; next_cursor: string | null }> {
+  const params = new URLSearchParams({ limit: String(PAGE_SIZE) });
+  if (cursor) params.set("cursor", cursor);
+  const res = await fetch(`/api/events?${params}`, { cache: "no-store" });
+  const data = await json<{ events: EventWithStats[]; next_cursor: string | null }>(res);
+  return {
+    events: Array.isArray(data.events) ? data.events : [],
+    next_cursor: data.next_cursor ?? null,
+  };
+}
+
+/** Fetch a single page (max 100). Prefer fetchAllEvents for the full catalog. */
+export async function fetchEvents(limit = PAGE_SIZE): Promise<EventWithStats[]> {
+  const { events } = await fetchEventsPage(null);
+  return events.slice(0, limit);
+}
+
+/**
+ * Load the entire event catalog by following cursor pagination until
+ * next_cursor is null. Works for any catalog size (184, 250, 500+).
+ */
+export async function fetchAllEvents(): Promise<EventWithStats[]> {
+  const all: EventWithStats[] = [];
+  const seenCursors = new Set<string>();
+  let cursor: string | null = null;
+  for (;;) {
+    const page = await fetchEventsPage(cursor);
+    all.push(...page.events);
+    cursor = page.next_cursor;
+    if (!cursor) break;
+    if (seenCursors.has(cursor)) {
+      throw new Error("Event pagination returned a repeated cursor.");
+    }
+    seenCursors.add(cursor);
+  }
+  return [...new Map(all.map((event) => [event.id, event])).values()];
 }
 
 export async function fetchEventStats(eventId: string): Promise<EventStats> {

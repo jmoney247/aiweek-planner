@@ -12,22 +12,30 @@ import type { Event } from "@/lib/types";
 /* ------------------------------------------------------------------ */
 
 const TYPE_STYLE: Record<string, { icon: string; gradient: string }> = {
-  Talk: { icon: "🎤", gradient: "linear-gradient(135deg,#FCAF45,#FD5949)" },
-  Panel: { icon: "💬", gradient: "linear-gradient(135deg,#FD5949,#E1306C)" },
-  Workshop: { icon: "🛠️", gradient: "linear-gradient(135deg,#F97316,#E1306C)" },
-  Meetup: { icon: "🤝", gradient: "linear-gradient(135deg,#FCAF45,#F97316)" },
-  Conference: { icon: "🎪", gradient: "linear-gradient(135deg,#E1306C,#833AB4)" },
-  Community: { icon: "🌐", gradient: "linear-gradient(135deg,#F97316,#833AB4)" },
-  Hackathon: { icon: "💻", gradient: "linear-gradient(135deg,#833AB4,#4F46E5)" },
-  Summit: { icon: "🏔️", gradient: "linear-gradient(135deg,#FD5949,#833AB4)" },
-  Keynote: { icon: "🎙️", gradient: "linear-gradient(135deg,#FCAF45,#E1306C)" },
-  Competition: { icon: "🏆", gradient: "linear-gradient(135deg,#F97316,#FCAF45)" },
-  Career: { icon: "💼", gradient: "linear-gradient(135deg,#E1306C,#4F46E5)" },
+  Talk: { icon: "🎤", gradient: "linear-gradient(135deg,#FF4FA3,#A855F7)" },
+  Panel: { icon: "💬", gradient: "linear-gradient(135deg,#A855F7,#6366F1)" },
+  Workshop: { icon: "🛠️", gradient: "linear-gradient(135deg,#FF4FA3,#6366F1)" },
+  Meetup: { icon: "🤝", gradient: "linear-gradient(135deg,#FF4FA3,#A78BFA)" },
+  Conference: { icon: "🎪", gradient: "linear-gradient(135deg,#A855F7,#3A183E)" },
+  Community: { icon: "🌐", gradient: "linear-gradient(135deg,#A78BFA,#6366F1)" },
+  Hackathon: { icon: "💻", gradient: "linear-gradient(135deg,#6366F1,#3A183E)" },
+  Summit: { icon: "🏔️", gradient: "linear-gradient(135deg,#FF4FA3,#3A183E)" },
+  Keynote: { icon: "🎙️", gradient: "linear-gradient(135deg,#FF4FA3,#A855F7)" },
+  Competition: { icon: "🏆", gradient: "linear-gradient(135deg,#FF4FA3,#FCAF45)" },
+  Career: { icon: "💼", gradient: "linear-gradient(135deg,#A855F7,#6366F1)" },
 };
 
-const FALLBACK_STYLE = { icon: "✨", gradient: "linear-gradient(135deg,#FCAF45,#FD5949)" };
+const FALLBACK_STYLE = { icon: "✨", gradient: "linear-gradient(135deg,#FF4FA3,#A855F7)" };
 
-export function CategoryTile({ eventType, className = "" }: { eventType: string | null; className?: string }) {
+export function CategoryTile({
+  eventType,
+  className = "",
+  compact = false,
+}: {
+  eventType: string | null;
+  className?: string;
+  compact?: boolean;
+}) {
   const style = (eventType && TYPE_STYLE[eventType]) || FALLBACK_STYLE;
   return (
     <div
@@ -35,7 +43,11 @@ export function CategoryTile({ eventType, className = "" }: { eventType: string 
       className={`flex items-center justify-center ${className}`}
       style={{ background: style.gradient }}
     >
-      <span className="text-5xl drop-shadow-sm" role="img" aria-hidden="true">
+      <span
+        className={`drop-shadow-sm ${compact ? "text-2xl" : "text-5xl"}`}
+        role="img"
+        aria-hidden="true"
+      >
         {style.icon}
       </span>
     </div>
@@ -71,8 +83,8 @@ export function RegisterButton({ event, className = "" }: { event: Event; classN
       rel="noopener noreferrer"
       className={`inline-flex min-h-[44px] items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold shadow ${
         direct
-          ? "bg-primary-bright text-white hover:bg-primary-ink"
-          : "border border-primary-bright/60 bg-white text-primary hover:bg-primary-soft"
+          ? "hero-gradient-bg text-white hover:opacity-90"
+          : "border border-pink/40 bg-white text-pink hover:bg-canvas-soft"
       } ${className}`}
     >
       {label}
@@ -99,9 +111,9 @@ function SaveStar({ event }: { event: Event }) {
       aria-pressed={saved}
       aria-label={saved ? `Remove "${event.display_title || event.title}" from My Plan` : `Save "${event.display_title || event.title}" to My Plan`}
       title={saved ? "Saved to My Plan" : "Save to My Plan"}
-      className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-stone-300 bg-white text-2xl leading-none hover:bg-stone-100"
+      className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-zinc-200 bg-white text-2xl leading-none hover:bg-canvas-soft"
     >
-      <span aria-hidden="true" className={saved ? "text-primary-bright" : "text-stone-400"}>
+      <span aria-hidden="true" className={saved ? "text-pink" : "text-zinc-400"}>
         {saved ? "★" : "☆"}
       </span>
     </button>
@@ -167,18 +179,18 @@ export default function EventCard({ event }: { event: Event }) {
   return (
     <article
       aria-labelledby={headingId}
-      className="flex h-full flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition-shadow hover:shadow-md"
+      className="flex h-full flex-col overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-card transition-shadow hover:shadow-card-hover"
     >
       <EventImage event={event} />
       <div className="flex flex-1 flex-col p-4">
         <div className="mb-2 flex flex-wrap items-center gap-2">
           {event.event_type && (
-            <span className="rounded-full bg-primary-soft px-2.5 py-0.5 text-xs font-semibold text-primary">
+            <span className="rounded-full bg-canvas-soft px-2.5 py-0.5 text-xs font-semibold text-plum">
               {event.event_type}
             </span>
           )}
           {live && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-semibold text-green-800">
+            <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2.5 py-0.5 text-xs font-semibold text-success">
               <span aria-hidden="true" className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-green-600" />
@@ -187,7 +199,7 @@ export default function EventCard({ event }: { event: Event }) {
             </span>
           )}
           {regBadge && (
-            <span className="rounded-full bg-stone-100 px-2.5 py-0.5 text-xs font-medium text-ink-soft">
+            <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-ink-soft">
               {regBadge}
             </span>
           )}
@@ -231,7 +243,7 @@ export default function EventCard({ event }: { event: Event }) {
           <SaveStar event={event} />
         </div>
 
-        <div className="mt-3 border-t border-stone-100 pt-2">
+        <div className="mt-3 border-t border-zinc-100 pt-2">
           <CommunityBar eventId={event.id} />
         </div>
       </div>

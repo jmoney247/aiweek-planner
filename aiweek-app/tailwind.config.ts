@@ -8,27 +8,29 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Warm light background
-        canvas: "#FFFDF8",
-        ink: { DEFAULT: "#1C1917", soft: "#57534E" },
-        // Primary action orange (WCAG AA on white: 4.6:1)
-        primary: {
-          DEFAULT: "#C2570B", // AA-safe orange for text/icons
-          bright: "#F97316", // vivid orange for fills/borders (pair with white text or dark text)
-          soft: "#FFF3E8",
+        canvas: "#FFFBFD",
+        "canvas-soft": "#FFF1F7",
+        ink: { DEFAULT: "#18181B", soft: "#52525B", muted: "#71717A" },
+        pink: {
+          DEFAULT: "#FF4FA3",
+          soft: "#FFF1F7",
+          ink: "#C2187A",
         },
-        // Instagram-gradient accents — used selectively (borders, headers, pills)
-        insta: {
-          amber: "#FCAF45",
-          coral: "#FD5949",
-          rose: "#E1306C",
-          violet: "#833AB4",
-          deep: "#FF6A00",
+        plum: "#3A183E",
+        lavender: "#A78BFA",
+        success: "#22C55E",
+        primary: {
+          DEFAULT: "#FF4FA3",
+          bright: "#FF4FA3",
+          ink: "#C2187A",
+          soft: "#FFF1F7",
         },
       },
       backgroundImage: {
-        "insta-gradient":
-          "linear-gradient(135deg,#FCAF45 0%,#FD5949 35%,#E1306C 70%,#833AB4 100%)",
+        "hero-gradient":
+          "linear-gradient(135deg, #FF4FA3 0%, #A855F7 50%, #6366F1 100%)",
+        "accent-gradient":
+          "linear-gradient(135deg, #FF4FA3 0%, #A855F7 100%)",
       },
       fontFamily: {
         sans: [
@@ -41,6 +43,14 @@ module.exports = {
           "Arial",
           "sans-serif",
         ],
+      },
+      boxShadow: {
+        card: "0 1px 3px rgba(24, 24, 27, 0.06), 0 1px 2px rgba(24, 24, 27, 0.04)",
+        "card-hover":
+          "0 4px 12px rgba(255, 79, 163, 0.08), 0 2px 4px rgba(24, 24, 27, 0.04)",
+      },
+      borderRadius: {
+        card: "16px",
       },
     },
   },

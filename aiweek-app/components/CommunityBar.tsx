@@ -97,7 +97,7 @@ function CommunityBarInner({
   };
 
   const btn =
-    "inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-3 text-sm font-medium hover:bg-stone-100";
+    "inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-3 text-sm font-medium hover:bg-canvas-soft";
 
   return (
     <div>
@@ -107,7 +107,7 @@ function CommunityBarInner({
           onClick={() => void handleReact("like")}
           aria-pressed={myReaction === "like"}
           aria-label={`Like this event, ${stats.likes} likes`}
-          className={`${btn} ${myReaction === "like" ? "bg-primary-soft text-primary" : "text-ink-soft"}`}
+          className={`${btn} ${myReaction === "like" ? "bg-canvas-soft text-pink" : "text-ink-soft"}`}
         >
           <span aria-hidden="true" className="text-base">👍</span>
           <span className="tabular-nums">{stats.likes}</span>
@@ -117,7 +117,7 @@ function CommunityBarInner({
           onClick={() => void handleReact("dislike")}
           aria-pressed={myReaction === "dislike"}
           aria-label={`Dislike this event, ${stats.dislikes} dislikes`}
-          className={`${btn} ${myReaction === "dislike" ? "bg-stone-200 text-ink" : "text-ink-soft"}`}
+          className={`${btn} ${myReaction === "dislike" ? "bg-zinc-200 text-ink" : "text-ink-soft"}`}
         >
           <span aria-hidden="true" className="text-base">👎</span>
           <span className="tabular-nums">{stats.dislikes}</span>
@@ -134,7 +134,7 @@ function CommunityBarInner({
         <button
           type="button"
           onClick={() => void handleCommentClick()}
-          className="ml-auto inline-flex min-h-[44px] items-center rounded-full px-3 text-sm font-semibold text-primary hover:bg-primary-soft"
+          className="ml-auto inline-flex min-h-[44px] items-center rounded-full px-3 text-sm font-semibold text-pink hover:bg-canvas-soft"
         >
           Write a comment
         </button>

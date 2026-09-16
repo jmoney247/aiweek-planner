@@ -10,7 +10,6 @@ export interface MappedEvent extends Event {
   lng: number;
 }
 
-/** Fix Leaflet's default icon paths under bundlers (no marker image 404s). */
 function useLeafletIconFix() {
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -38,23 +37,23 @@ function ResizeFix() {
 }
 
 const BOSTON: [number, number] = [42.3601, -71.0589];
-const ORANGE = "#F97316";
-const INSTA = "linear-gradient(135deg,#FCAF45,#FD5949,#E1306C,#833AB4)";
+const PINK = "#FF4FA3";
+const HERO = "linear-gradient(135deg,#FF4FA3,#A855F7,#6366F1)";
 
 function pinIcon(selected: boolean, hovered: boolean, live: boolean): L.DivIcon {
   const size = selected || hovered ? 40 : 32;
   const liveDot = live
-    ? `<span style="position:absolute;top:-3px;right:-3px;width:12px;height:12px;border-radius:9999px;background:#16A34A;border:2px solid #fff;"></span>`
+    ? `<span style="position:absolute;top:-3px;right:-3px;width:12px;height:12px;border-radius:9999px;background:#22C55E;border:2px solid #fff;"></span>`
     : "";
   return L.divIcon({
     className: "aiweek-pin",
     html:
       `<div style="position:relative;width:${size}px;height:${size}px;">` +
       `<div style="width:${size}px;height:${size}px;border-radius:9999px;` +
-      `background:${selected ? INSTA : ORANGE};` +
-      `border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.35);` +
+      `background:${selected ? HERO : PINK};` +
+      `border:3px solid #fff;box-shadow:0 2px 8px rgba(58,24,62,.25);` +
       `display:flex;align-items:center;justify-content:center;` +
-      `${selected ? "outline:3px solid rgba(225,48,108,.55);outline-offset:2px;" : ""}">` +
+      `${selected ? "outline:3px solid rgba(255,79,163,.45);outline-offset:2px;" : ""}">` +
       `<span style="width:10px;height:10px;border-radius:9999px;background:#fff;"></span>` +
       `</div>${liveDot}</div>`,
     iconSize: [size, size],
@@ -66,8 +65,8 @@ function clusterIcon(count: number): L.DivIcon {
   return L.divIcon({
     className: "aiweek-cluster",
     html:
-      `<div style="width:44px;height:44px;border-radius:9999px;background:${ORANGE};` +
-      `border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.35);color:#fff;` +
+      `<div style="width:44px;height:44px;border-radius:9999px;background:${PINK};` +
+      `border:3px solid #fff;box-shadow:0 2px 8px rgba(58,24,62,.25);color:#fff;` +
       `font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;">${count}</div>`,
     iconSize: [44, 44],
     iconAnchor: [22, 22],
@@ -81,7 +80,6 @@ interface Cluster {
   events: MappedEvent[];
 }
 
-/** Grid precision shrinks as zoom grows; no clustering at high zoom. */
 function gridSizeForZoom(zoom: number): number | null {
   if (zoom < 12) return 0.06;
   if (zoom < 14) return 0.02;
@@ -187,25 +185,20 @@ interface Props {
   onHover: (id: string | null) => void;
 }
 
-/**
- * Leaflet map: warm-orange divIcon markers (Instagram gradient when
- * selected), lightweight grid clustering at low zoom (counts, expand on
- * click), a live-now dot for ongoing events, aria labels on markers.
- */
 export default function MapView({ events, selectedId, hoveredId, onSelect, onHover }: Props) {
   return (
     <MapContainer
       center={BOSTON}
       zoom={13}
-      scrollWheelZoom={false}
-      className="h-full w-full"
+      scrollWheelZoom
+      className="h-full w-full rounded-2xl"
       aria-label="Map of Boston AI Week event locations"
     >
       <IconFix />
       <ResizeFix />
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <ClusterLayer
         events={events}

@@ -46,7 +46,7 @@ export default function EventDrawer({ event, onClose }: Props) {
       role="dialog"
       aria-modal="false"
       aria-labelledby="event-drawer-title"
-      className="absolute inset-x-0 bottom-0 z-[500] max-h-[70%] overflow-y-auto rounded-t-2xl border-t-2 border-primary-bright/40 bg-white shadow-2xl md:inset-x-auto md:bottom-auto md:right-4 md:top-4 md:max-h-[calc(100%-2rem)] md:w-[380px] md:rounded-2xl md:border"
+      className="absolute inset-x-0 bottom-0 z-[500] max-h-[70%] overflow-y-auto rounded-t-2xl border-t-2 border-pink/40 bg-white shadow-2xl md:inset-x-auto md:bottom-auto md:right-4 md:top-4 md:max-h-[calc(100%-2rem)] md:w-[380px] md:rounded-2xl md:border md:border-zinc-200"
     >
       <div ref={panelRef}>
         <CategoryTile eventType={event.event_type} className="h-28 w-full" />
@@ -59,7 +59,7 @@ export default function EventDrawer({ event, onClose }: Props) {
               type="button"
               onClick={onClose}
               aria-label="Close event details"
-              className="inline-flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-full text-xl hover:bg-stone-100"
+              className="inline-flex min-h-[44px] min-w-[44px] shrink-0 items-center justify-center rounded-full text-xl hover:bg-canvas-soft"
             >
               <span aria-hidden="true">✕</span>
             </button>
@@ -67,7 +67,7 @@ export default function EventDrawer({ event, onClose }: Props) {
 
           <div className="mt-2 flex flex-wrap items-center gap-2">
             {event.event_type && (
-              <span className="rounded-full bg-primary-soft px-2.5 py-0.5 text-xs font-semibold text-primary">
+              <span className="rounded-full bg-canvas-soft px-2.5 py-0.5 text-xs font-semibold text-plum">
                 {event.event_type}
               </span>
             )}
@@ -125,7 +125,7 @@ export default function EventDrawer({ event, onClose }: Props) {
             <RegisterButton event={event} className="w-full" />
           </div>
 
-          <div className="mt-3 border-t border-stone-100 pt-2">
+          <div className="mt-3 border-t border-zinc-100 pt-2">
             <CommunityBar eventId={event.id} lazy={false} />
           </div>
         </div>
