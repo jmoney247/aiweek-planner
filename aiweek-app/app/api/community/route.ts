@@ -14,6 +14,12 @@ export async function GET(req: NextRequest) {
     const sb = requireServiceClient();
     const session = await getSessionUser(req);
     const sp = req.nextUrl.searchParams;
+    if (sp.get('preview') === '1') {
+      if (!sp.get('event')) throw new HttpError(400, 'Choose an event.');
+      const preview = await sb.from('community_feed').select('id,body,display_name_snapshot').eq('event_id', sp.get('event')).order('created_at', { ascending: false }).order('id', { ascending: false }).limit(2);
+      if (preview.error) throw new HttpError(503, 'Recent comments are temporarily unavailable.');
+      return NextResponse.json({ posts: preview.data.map(p => ({ id: p.id, body: p.body, display_name: p.display_name_snapshot })) }, { headers: { 'Cache-Control': 'private, no-store' } });
+    }
     const offset = Number(sp.get('offset') || 0);
     if (!Number.isSafeInteger(offset) || offset < 0) throw new HttpError(400, 'Invalid page.');
     let query = sb.from('community_feed').select('*');

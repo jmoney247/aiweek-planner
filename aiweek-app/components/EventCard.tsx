@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import CommunityBar from "@/components/CommunityBar";
+import RecentComments from './RecentComments';
 import Link from 'next/link';
 import { formatEventDate, formatLocation, isLiveNow, trimText } from "@/lib/format";
 import { isSaved, saveEvent, unsaveEvent, onSavedChange } from "@/lib/saved";
@@ -150,10 +151,10 @@ function registrationBadge(event: Event): string | null {
 /* onError swaps to the fallback tile (never a broken-image glyph).    */
 /* ------------------------------------------------------------------ */
 
-function EventImage({ event }: { event: Event }) {
+function EventImage({ event, gallery = false }: { event: Event; gallery?: boolean }) {
   const [failed, setFailed] = useState(false);
   const title = displayTitle(event);
-  const className = "h-24 w-full shrink-0";
+  const className = gallery ? "aspect-[4/3] w-full shrink-0" : "h-24 w-full shrink-0";
   if (event.image_url && !failed) {
     return (
       <div className={`relative overflow-hidden ${className}`}>
@@ -170,7 +171,7 @@ function EventImage({ event }: { event: Event }) {
   return <CategoryTile eventType={event.event_type} className={className} />;
 }
 
-export default function EventCard({ event }: { event: Event }) {
+export default function EventCard({ event, gallery = false }: { event: Event; gallery?: boolean }) {
   const title = displayTitle(event);
   const summary = displaySummary(event);
   const location = formatLocation(event.city, event.neighborhood);
@@ -183,7 +184,7 @@ export default function EventCard({ event }: { event: Event }) {
       aria-labelledby={headingId}
       className="flex h-full flex-col overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-card transition-shadow hover:shadow-card-hover"
     >
-      <EventImage event={event} />
+      <EventImage event={event} gallery={gallery} />
       <div className="flex flex-1 flex-col p-3">
         <div className="mb-2 flex flex-wrap items-center gap-2">
           {event.event_type && (
@@ -208,9 +209,9 @@ export default function EventCard({ event }: { event: Event }) {
         </div>
 
         <h3 id={headingId} className="text-base font-bold leading-snug">
-          {title}
+          <Link href={`/events/${encodeURIComponent(event.id)}`} className="hover:underline">{title}</Link>
         </h3>
-        {summary && <p className="mt-1.5 text-sm text-ink-soft">{summary}</p>}
+        {!gallery && summary && <p className="mt-1.5 text-sm text-ink-soft">{summary}</p>}
 
         <dl className="mt-3 space-y-1 text-sm text-ink-soft">
           <div className="flex gap-2">
@@ -220,6 +221,7 @@ export default function EventCard({ event }: { event: Event }) {
               <time dateTime={event.start_at}>{formatEventDate(event.start_at, event.end_at)}</time>
             </dd>
           </div>
+          {event.venue && <div><dt className="sr-only">Venue</dt><dd className="font-medium">{event.venue}</dd></div>}
           {location && (
             <div className="flex gap-2">
               <dt className="sr-only">Location</dt>
@@ -247,7 +249,8 @@ export default function EventCard({ event }: { event: Event }) {
 
         <div className="mt-3 border-t border-zinc-100 pt-2">
           <div className="flex flex-wrap gap-4 text-sm text-pink"><Link className="inline-flex min-h-[44px] items-center underline" href={`/events/${encodeURIComponent(event.id)}`}>Event details & experiences</Link><Link className="inline-flex min-h-[44px] items-center underline" href={`/?event=${encodeURIComponent(event.id)}#map`}>View on map</Link></div>
-          <CommunityBar eventId={event.id} />
+          <CommunityBar eventId={event.id} compact={gallery} />
+          {gallery && <RecentComments eventId={event.id} />}
         </div>
       </div>
     </article>

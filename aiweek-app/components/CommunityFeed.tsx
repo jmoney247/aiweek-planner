@@ -42,11 +42,11 @@ export default function CommunityFeed({ eventId, mode = 'comments', postId }: { 
       setRevision(r => r + 1);
     } catch(e) { setError((e as Error).message); } finally { setBusy(null); }
   };
-  return <section id={eventId ? 'event-comments' : 'community'} className={`space-y-4 scroll-mt-24 ${gallery ? '' : 'rounded-2xl border border-pink/30 bg-canvas-soft/60 p-3 md:p-5'}`} aria-label={gallery ? "Gallery" : "Comments"}>
-    <header className="flex flex-wrap items-start justify-between gap-4"><div><h2 className="text-2xl font-extrabold md:text-3xl">{gallery ? "Gallery" : "Comments"}</h2><p className="mt-2 text-ink-soft">{gallery ? "Explore photos shared by the community. Each set links back to its original post and event." : "Honest experiences, photos, and questions across events."}</p></div><Link className={`${control} text-pink`} href="/#map">Explore the map</Link></header>
+  return <section id={eventId ? 'event-comments' : 'community'} className={`space-y-4 scroll-mt-24 ${gallery ? '' : 'rounded-2xl border border-pink/30 bg-canvas-soft/60 p-3 md:p-5'}`} aria-label={gallery ? "Photos" : "Hype"}>
+    <header className="flex flex-wrap items-start justify-between gap-4"><div><h2 className="text-2xl font-extrabold md:text-3xl">{gallery ? "Community photos" : "📣 Hype"}</h2><p className="mt-2 text-ink-soft">{gallery ? "Explore photos shared by the community." : eventId ? "This event’s public discussion: comments, photos, and honest experiences." : "See what people are saying. Read public comments, share photos, and join the conversation."}</p></div><Link className={`${control} text-pink`} href="/#map">🗺️ Maps</Link></header>
     {!gallery && <ProfilePanel />}
     {gallery && <Link className="inline-flex min-h-[44px] items-center text-pink underline" href="/comments">Read comments or share a photo</Link>}
-    {postId && <Link className="inline-flex min-h-[44px] items-center text-pink underline" href="/comments">View all comments</Link>}
+    {postId && <Link className="inline-flex min-h-[44px] items-center text-pink underline" href="/comments">View all Hype</Link>}
     {!postId && <div className="flex flex-wrap gap-3">
       {!gallery && <div className="flex flex-wrap gap-2" role="group" aria-label="Post type">{['all','photos','comments'].map(value => <button key={value} aria-pressed={filter === value} className={`${control} ${filter === value ? '!bg-pink font-bold' : ''}`} onClick={() => setFilter(value)}>{filter === value ? '✓ ' : ''}{value[0].toUpperCase() + value.slice(1)}</button>)}</div>}
       <label className="flex items-center gap-2">Sort<select className={control} value={sort} onChange={e => setSort(e.target.value)}><option value="newest">Newest first</option><option value="liked">Most liked</option></select></label>
@@ -70,6 +70,7 @@ export default function CommunityFeed({ eventId, mode = 'comments', postId }: { 
             form.append('photo_paths', path);
           }
           await communityRequest('/api/community', { method: 'POST', body: form });
+          window.dispatchEvent(new Event('hype-posted'));
           setBody(''); setFiles([]); uploadedPhotos.current.clear(); if (fileInput.current) fileInput.current.value = '';
           setNotice('Thanks—your experience has been posted.'); setFilter('all'); setSort('newest'); setEvent(''); setRevision(r => r + 1);
         } catch(e) { setNotice((e as Error).message); } finally { setBusy(null); setProgress(null); }

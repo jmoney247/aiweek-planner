@@ -86,13 +86,14 @@ export default function PlannerDashboard() {
         </p>
       </header>
       <div className="mt-3 space-y-2 text-base text-ink-soft">
-        <p>📣 <Link className="font-bold text-pink underline" href="/comments">HYPE!</Link> — see what people are saying.</p>
-        <p>🗺️ <a className="font-bold text-pink underline" href="#map">Map</a> — see where events are happening.</p>
+        <p>📣 <Link className="font-bold text-pink underline" href="/comments">Hype</Link> — see what people are saying.</p>
+        <p>🗺️ <a className="font-bold text-pink underline" href="#map">Maps</a> — see where events are happening.</p>
+        <p>🖼️ <Link className="font-bold text-pink underline" href="/gallery">Gallery</Link> — see all the events.</p>
       </div>
       <nav aria-label="Explore the planner" className="mt-5 flex flex-wrap gap-3">
-        <a href="#map" className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-pink px-4 font-semibold text-ink">🗺️ Map &amp; Events <span aria-hidden="true">↓</span></a>
-        <Link href="/comments" className="inline-flex min-h-[44px] items-center rounded-full border border-pink/40 bg-white px-4 font-semibold text-ink">💬 Comments</Link>
-        <Link href="/gallery" className="inline-flex min-h-[44px] items-center rounded-full border border-pink/40 bg-white px-5 font-semibold text-ink">Gallery</Link>
+        <a href="#map" className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-pink px-4 font-semibold text-ink">🗺️ Maps <span aria-hidden="true">↓</span></a>
+        <Link href="/comments" className="inline-flex min-h-[44px] items-center rounded-full border border-pink/40 bg-white px-4 font-semibold text-ink">📣 Hype</Link>
+        <Link href="/gallery" className="inline-flex min-h-[44px] items-center rounded-full border border-pink/40 bg-white px-5 font-semibold text-ink">🖼️ Gallery</Link>
       </nav>
 
       <div className="mt-6">

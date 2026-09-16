@@ -1,4 +1,4 @@
-import CommunityFeed from '@/components/CommunityFeed';
+import EventGallery from '@/components/EventGallery';
 export default function GalleryPage() {
-  return <main className="mx-auto max-w-7xl px-4 py-8 md:py-10"><CommunityFeed mode="gallery" /></main>;
+  return <EventGallery />;
 }
