@@ -93,7 +93,7 @@ export async function getSessionUser(req: NextRequest): Promise<SessionUser | nu
 
     const { data, error } = await sb
       .from("user_sessions")
-      .select("id, user_id, expires_at, anon_users(id, display_name)")
+      .select("id, user_id, expires_at, anon_users(id, display_name, moderation_status)")
       .eq("token_hash", hashSessionToken(token))
       .maybeSingle();
 
@@ -106,8 +106,9 @@ export async function getSessionUser(req: NextRequest): Promise<SessionUser | nu
     const user = data.anon_users as unknown as {
       id: string;
       display_name: string;
+      moderation_status: string;
     } | null;
-    if (!user) return null;
+    if (!user || user.moderation_status !== 'active') return null;
     return { userId: user.id, displayName: user.display_name };
   } catch {
     return null;

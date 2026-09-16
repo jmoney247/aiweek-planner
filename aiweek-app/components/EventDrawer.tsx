@@ -5,6 +5,7 @@ import CommunityBar from "@/components/CommunityBar";
 import { CategoryTile, RegisterButton, displaySummary, displayTitle } from "@/components/EventCard";
 import { formatEventDate, formatLocation, isLiveNow } from "@/lib/format";
 import type { Event } from "@/lib/types";
+import Link from 'next/link';
 
 interface Props {
   event: Event | null;
@@ -117,6 +118,8 @@ export default function EventDrawer({ event, onClose }: Props) {
           </dl>
 
           {summary && <p className="mt-3 text-sm">{summary}</p>}
+          <p className="mt-3 text-sm text-ink-soft">{event.location_accuracy === 'approximate' ? 'Approximate district pin—exact venue undisclosed.' : event.lat == null ? 'Location not mapped yet.' : 'Confirm arrival details with the organizer.'}</p>
+          <Link className="mt-3 inline-flex min-h-[44px] items-center font-bold text-pink underline" href={`/events/${encodeURIComponent(event.id)}`}>Event page, photos & experiences</Link>
           {event.about && event.about !== summary && (
             <p className="mt-2 whitespace-pre-wrap text-sm text-ink-soft">{event.about}</p>
           )}

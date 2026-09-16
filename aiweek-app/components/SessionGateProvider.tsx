@@ -1,68 +1,28 @@
 "use client";
-
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useRef,
-  useState,
-  type ReactNode,
-} from "react";
-import DisplayNameGate from "@/components/DisplayNameGate";
-import { getStoredUser, storeUser } from "@/lib/session";
-import type { SessionUser } from "@/lib/api";
-
-interface SessionGateContextValue {
-  /** Resolve the current user, or prompt for a display name first. */
-  requireSession: () => Promise<SessionUser | null>;
-  user: SessionUser | null;
-}
-
-const SessionGateContext = createContext<SessionGateContextValue>({
-  requireSession: async () => null,
-  user: null,
-});
-
-export function useSessionGate(): SessionGateContextValue {
-  return useContext(SessionGateContext);
-}
-
-/**
- * Hosts the display-name gate modal. Wrap the app in this (client) provider;
- * any component can call `requireSession()` before a gated action (like,
- * dislike, comment). The pending action resumes after the user continues.
- */
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
+import { storeUser, clearStoredUser } from '@/lib/session';
+import { communityRequest } from '@/lib/community-client';
+import type { SessionUser } from '@/lib/api';
+interface Context { requireSession: () => Promise<SessionUser | null>; user: SessionUser | null; editName: (name: string) => Promise<void> }
+const SessionContext = createContext<Context>({ requireSession: async () => null, user: null, editName: async () => {} });
+export const useSessionGate = () => useContext(SessionContext);
 export function SessionGateProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<SessionUser | null>(() => getStoredUser());
-  const [gateOpen, setGateOpen] = useState(false);
-  const resolverRef = useRef<((u: SessionUser | null) => void) | null>(null);
-
-  const requireSession = useCallback(async (): Promise<SessionUser | null> => {
-    const existing = getStoredUser();
-    if (existing) {
-      setUser(existing);
-      return existing;
-    }
-    return new Promise((resolve) => {
-      resolverRef.current = resolve;
-      setGateOpen(true);
-    });
+  const [user, setUser] = useState<SessionUser | null>(null);
+  const [error, setError] = useState('');
+  const pending = useRef<Promise<SessionUser | null> | null>(null);
+  useEffect(() => { fetch('/api/session', { cache: 'no-store' }).then(async res => {
+    if (res.ok) { const data = await res.json(); storeUser(data.user); setUser(data.user); }
+    else if (res.status === 401) clearStoredUser();
+  }).catch(() => {}); }, []);
+  const requireSession = useCallback(() => {
+    if (!pending.current) pending.current = communityRequest<{ user: SessionUser }>('/api/session', { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' })
+      .then(({ user }) => { setUser(user); storeUser(user); setError(''); return user; })
+      .catch((error: Error) => { setError(error.message); return null; }).finally(() => { pending.current = null; });
+    return pending.current;
   }, []);
-
-  const handleDone = useCallback((u: SessionUser | null) => {
-    setGateOpen(false);
-    if (u) {
-      storeUser(u);
-      setUser(u);
-    }
-    resolverRef.current?.(u);
-    resolverRef.current = null;
-  }, []);
-
-  return (
-    <SessionGateContext.Provider value={{ requireSession, user }}>
-      {children}
-      <DisplayNameGate open={gateOpen} onDone={handleDone} />
-    </SessionGateContext.Provider>
-  );
+  const editName = async (display_name: string) => {
+    const result = await communityRequest<{ user: SessionUser }>('/api/session', { method: 'PATCH', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ display_name }) });
+    storeUser(result.user); setUser(result.user);
+  };
+  return <SessionContext.Provider value={{ user, requireSession, editName }}>{children}{error && <div role="alert" className="fixed bottom-4 left-4 right-4 z-[1000] rounded-xl border bg-white p-4 shadow-lg">{error}<button className="ml-4 min-h-[44px] underline" onClick={() => setError('')}>Dismiss</button></div>}</SessionContext.Provider>;
 }

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { HttpError, handleRoute } from "@/lib/http";
 import { requireAnonClient } from "@/lib/db";
 import { getEventStats } from "@/lib/community";
+import { eventCoordinates } from "@/lib/event-coordinates";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -25,13 +26,14 @@ export async function GET(
 
     const { data, error } = await sb
       .from("events")
-      .select(EVENT_COLUMNS)
+      .select("*")
       .eq("id", id)
       .maybeSingle();
     if (error) throw new HttpError(500, "Could not load event.");
     if (!data) throw new HttpError(404, "Event not found.");
 
     const stats = await getEventStats(sb, id);
-    return NextResponse.json({ event: { ...data, stats } });
+    const publicEvent = Object.fromEntries(EVENT_COLUMNS.split(", ").map((key) => [key, data[key] ?? null]));
+    return NextResponse.json({ event: { ...publicEvent, ...eventCoordinates(data), stats } });
   });
 }

@@ -61,8 +61,7 @@ export default function Header() {
         </Link>
         <nav aria-label="Primary" className="flex items-center gap-1">
           {link("/#map", "Map", (p) => p === "/")}
-          {link("/gallery", "Gallery", (p) => p === "/gallery")}
-          <Link href="/gallery#community" className="inline-flex min-h-[44px] items-center rounded-full px-3 text-sm font-semibold text-ink-soft hover:bg-canvas-soft">Comments</Link>
+          {link("/gallery", "What people are saying", (p) => p === "/gallery")}
           {link("/plan", "My Plan", (p) => p === "/plan")}
         </nav>
       </div>

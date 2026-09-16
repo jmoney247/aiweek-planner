@@ -1,0 +1,1154 @@
+{
+  "when-ai-gets-physical-navigating-the-real-world-risks-and-rewards@aiweek.boston": {
+    "lat": 42.354033892436,
+    "lng": -71.052690922639,
+    "address": "510 Atlantic Ave Boston, MA 02210",
+    "venue": "Matria at the InterContinental",
+    "city": "Boston",
+    "matchedAddress": "510 ATLANTIC AVE, BOSTON, MA, 02210",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "gtm-under-pressure-the-ai-mystery-basket-challenge@aiweek.boston": {
+    "lat": 42.344769901261,
+    "lng": -71.096852108439,
+    "address": "1282 Boylston Street (entrance on Jersey St.), Boston, MA 02215",
+    "venue": "Fenway Community Center",
+    "city": "Boston",
+    "matchedAddress": "1282 BOYLSTON ST, BOSTON, MA, 02215",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "boston-generative-ai-meetup-2026@aiweek.boston": {
+    "lat": 42.346990465883,
+    "lng": -71.043757887368,
+    "address": "425 Summer St, Boston, MA 02210",
+    "venue": "Laugh Boston (in the Westin Boston Seaport)",
+    "city": "Boston",
+    "matchedAddress": "425 SUMMER ST, BOSTON, MA, 02210",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "langsmith-roadshow-building-agents-with-agents-boston@aiweek.boston": {
+    "lat": 42.358180663373,
+    "lng": -71.057911732257,
+    "address": "201 Washington St, Boston, MA 02108",
+    "venue": "Convene One Boston Place",
+    "city": "Boston",
+    "matchedAddress": "201 WASHINGTON ST, BOSTON, MA, 02108",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "cambridge-ai-civil-rights-proclamation@aiweek.boston": {
+    "lat": 42.366866052891,
+    "lng": -71.106027848872,
+    "address": "795 Massachusetts Ave, Cambridge, MA",
+    "venue": "Sullivan Chamber, Cambridge City Hall",
+    "city": "Cambridge",
+    "matchedAddress": "795 MASSACHUSETTS AVE, CAMBRIDGE, MA, 02139",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-in-finance-lab-boston@aiweek.boston": {
+    "lat": 42.354816639029,
+    "lng": -71.056398272734,
+    "address": "115 Federal Street, Boston, MA 02110",
+    "venue": "Deloitte Boston",
+    "city": "Boston",
+    "matchedAddress": "115 FEDERAL ST, BOSTON, MA, 02110",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "celebrate-hope-chris-hope-day-2026@aiweek.boston": {
+    "lat": 42.366866052891,
+    "lng": -71.106027848872,
+    "address": "795 Massachusetts Ave, Cambridge, MA 02139",
+    "venue": "Cambridge City Hall",
+    "city": "Cambridge",
+    "matchedAddress": "795 MASSACHUSETTS AVE, CAMBRIDGE, MA, 02139",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ma-workforce-ai-career-fair-2026@aiweek.boston": {
+    "lat": 42.350606048145,
+    "lng": -71.110107527267,
+    "address": "775 Commonwealth Avenue, Boston, MA 02215",
+    "venue": "Metcalf Hall Grand Ballroom, George Sherman Union, Boston University",
+    "city": "Boston",
+    "matchedAddress": "775 COMMONWEALTH AVE, BOSTON, MA, 02215",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "wentworth-ai-test-kitchen-2026@aiweek.boston": {
+    "lat": 42.337237593327,
+    "lng": -71.09641249331,
+    "address": "550 Huntington Ave, Boston, MA 02115",
+    "venue": "CEIS Foyer, Wentworth Institute of Technology",
+    "city": "Boston",
+    "matchedAddress": "550 HUNTINGTON AVE, BOSTON, MA, 02115",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "architecture-and-ai-wentworth-2026@aiweek.boston": {
+    "lat": 42.337237593327,
+    "lng": -71.09641249331,
+    "address": "550 Huntington Ave, Boston, MA 02115",
+    "venue": "Wentworth Institute of Technology",
+    "city": "Boston",
+    "matchedAddress": "550 HUNTINGTON AVE, BOSTON, MA, 02115",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "national-security-defense-tech-demo-day-2026@aiweek.boston": {
+    "lat": 42.366275290703,
+    "lng": -71.125479445065,
+    "address": "25 Harvard Way, Boston, MA 02163",
+    "venue": "Klarman Auditorium, Harvard Business School",
+    "city": "Boston",
+    "matchedAddress": "25 HARVARD WAY, BOSTON, MA, 02163",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "jd-ai-building-whats-next-at-democracy-brewing@aiweek.boston": {
+    "lat": 42.355325211003,
+    "lng": -71.062317674653,
+    "address": "35 Temple Place Boston, MA 02111",
+    "venue": "Democracy Brewing",
+    "city": "Boston",
+    "matchedAddress": "35 TEMPLE PL, BOSTON, MA, 02111",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-in-ma-and-financing-workbar-needham-2026@aiweek.boston": {
+    "lat": 42.296357110275,
+    "lng": -71.21182689337,
+    "address": "117 Kendrick Street, Suite 300, Needham, MA 02494",
+    "venue": "Workbar Needham",
+    "city": "Needham",
+    "matchedAddress": "117 KENDRICK ST, NEEDHAM, MA, 02494",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-entrepreneurial-finance-workbar-needham-2026@aiweek.boston": {
+    "lat": 42.296357110275,
+    "lng": -71.21182689337,
+    "address": "117 Kendrick Street, Suite 300, Needham, MA 02494",
+    "venue": "Workbar Needham",
+    "city": "Needham",
+    "matchedAddress": "117 KENDRICK ST, NEEDHAM, MA, 02494",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "networking-connection-workbar-needham-2026@aiweek.boston": {
+    "lat": 42.296357110275,
+    "lng": -71.21182689337,
+    "address": "117 Kendrick Street, Suite 300, Needham, MA 02494",
+    "venue": "Workbar Needham",
+    "city": "Needham",
+    "matchedAddress": "117 KENDRICK ST, NEEDHAM, MA, 02494",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-in-action-questrom-2026@aiweek.boston": {
+    "lat": 42.34938100837,
+    "lng": -71.100287567995,
+    "address": "595 Commonwealth Avenue, 4th Floor, Boston, MA 02215",
+    "venue": "Questrom School of Business",
+    "city": "Boston",
+    "matchedAddress": "595 COMMONWEALTH AVE, BOSTON, MA, 02215",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-week-keynote-how-ai-startups-will-reshape-bostons-future@aiweek.boston": {
+    "lat": 42.357041099109,
+    "lng": -71.055803105925,
+    "address": "10 Post Office Square, Boston, MA 02109",
+    "venue": "10 Post Office Square",
+    "city": "Boston",
+    "matchedAddress": "10 POST OFFICE SQ, BOSTON, MA, 02109",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "safe-ai-governance-dont-let-ai-eat-your-lunch@aiweek.boston": {
+    "lat": 42.357041099109,
+    "lng": -71.055803105925,
+    "address": "10 Post Office Square. Boston, MA 02109. It is on the 2nd floor \"Floor M\" can be accessed through the north elevator Office hours 7AM-5PM",
+    "venue": "Focus Technology Solutions – Conference Room / Mezzanine",
+    "city": "Boston",
+    "matchedAddress": "10 POST OFFICE SQ, BOSTON, MA, 02109",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "thriving-in-the-age-of-ai-the-intersection-of-business-higher-education-and-tech@aiweek.boston": {
+    "lat": 42.368768647509,
+    "lng": -71.078505492016,
+    "address": "1 Education St, Cambridge MA 02141",
+    "venue": "Hult International Business School",
+    "city": "Cambridge",
+    "matchedAddress": "1 EDUCATION ST, CAMBRIDGE, MA, 02141",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-for-all-britebound-2026@aiweek.boston": {
+    "lat": 42.355934803605,
+    "lng": -71.057906637052,
+    "address": "33 Arch St., 21st Floor, Boston, MA",
+    "venue": "Britebound",
+    "city": "Boston",
+    "matchedAddress": "33 ARCH ST, BOSTON, MA, 02110",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "boston-ai-executive-exchange-executive-dinner-and-roundtable@aiweek.boston": {
+    "lat": 42.365319343633,
+    "lng": -71.06109159627,
+    "address": "180 Canal St, 5th floor, Boston, MA 02114",
+    "venue": "The Legacy Club",
+    "city": "Boston",
+    "matchedAddress": "180 CANAL ST, BOSTON, MA, 02114",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "executive-dinner-the-future-of-ai@aiweek.boston": {
+    "lat": 42.350932251615,
+    "lng": -71.07031451369,
+    "address": "75 Arlington St, Boston, MA 02116",
+    "venue": "Davios",
+    "city": "Boston",
+    "matchedAddress": "75 ARLINGTON ST, BOSTON, MA, 02116",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "christensen-institute-innovation-summit-2026@aiweek.boston": {
+    "lat": 42.363455584493,
+    "lng": -71.127267138252,
+    "address": "135 Western Ave, Allston, MA 02134",
+    "venue": "David Rubenstein Treehouse, Harvard University",
+    "city": "Boston",
+    "matchedAddress": "135 WESTERN AVE, ALLSTON, MA, 02134",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "growing-revenue-enterprise-gtm-ai-infrastructure-2026@aiweek.boston": {
+    "lat": 42.393057026354,
+    "lng": -71.258593557371,
+    "address": "77 Fourth Avenue, Waltham, MA 02451",
+    "venue": "Rocket Software Office",
+    "city": "Waltham",
+    "matchedAddress": "77 4TH AVE, WALTHAM, MA, 02451",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "devconf-us-2026@aiweek.boston": {
+    "lat": 42.343391473804,
+    "lng": -71.110035167971,
+    "address": "43 Hawes Street, Brookline, MA 02446",
+    "venue": "Boston University Wheelock College of Education & Human Development – Brookline Campus",
+    "city": "Boston",
+    "matchedAddress": "43 HAWES ST, BROOKLINE, MA, 02446",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "mit-futurefest-2026-day-1@aiweek.boston": {
+    "lat": 42.35895455855,
+    "lng": -71.093450725758,
+    "address": "77 Massachusetts Avenue, Cambridge, MA 02139",
+    "venue": "MIT Campus",
+    "city": "Cambridge",
+    "matchedAddress": "77 MASSACHUSETTS AVE, CAMBRIDGE, MA, 02139",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "mit-futurefest-2026-day-2@aiweek.boston": {
+    "lat": 42.35895455855,
+    "lng": -71.093450725758,
+    "address": "77 Massachusetts Avenue, Cambridge, MA 02139",
+    "venue": "MIT Campus",
+    "city": "Cambridge",
+    "matchedAddress": "77 MASSACHUSETTS AVE, CAMBRIDGE, MA, 02139",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "mit-futurefest-2026-day-3@aiweek.boston": {
+    "lat": 42.35895455855,
+    "lng": -71.093450725758,
+    "address": "77 Massachusetts Avenue, Cambridge, MA 02139",
+    "venue": "MIT Campus",
+    "city": "Cambridge",
+    "matchedAddress": "77 MASSACHUSETTS AVE, CAMBRIDGE, MA, 02139",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "mit-futurefest-2026-day-4@aiweek.boston": {
+    "lat": 42.35895455855,
+    "lng": -71.093450725758,
+    "address": "77 Massachusetts Avenue, Cambridge, MA 02139",
+    "venue": "MIT Campus",
+    "city": "Cambridge",
+    "matchedAddress": "77 MASSACHUSETTS AVE, CAMBRIDGE, MA, 02139",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "mit-futurefest-2026-day-5@aiweek.boston": {
+    "lat": 42.35895455855,
+    "lng": -71.093450725758,
+    "address": "77 Massachusetts Avenue, Cambridge, MA 02139",
+    "venue": "MIT Campus",
+    "city": "Cambridge",
+    "matchedAddress": "77 MASSACHUSETTS AVE, CAMBRIDGE, MA, 02139",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "how-our-ai-navigator-has-supported-success-in-developing-healthier-happier-peopl@aiweek.boston": {
+    "lat": 42.362425162557,
+    "lng": -71.085106155726,
+    "address": "245 Main Street, Cambridge",
+    "venue": "Hogsmeade Room, CIC Cambridge",
+    "city": "Virtual",
+    "matchedAddress": "245 MAIN ST, CAMBRIDGE, MA, 02142",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "boston-cloud-connect-summit@aiweek.boston": {
+    "lat": 42.357345950353,
+    "lng": -71.148233105806,
+    "address": "1 Guest Street, Boston, MA",
+    "venue": "WGBH Studio's Yawkey Theater",
+    "city": "Boston",
+    "matchedAddress": "1 GUEST ST, BOSTON, MA, 02135",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "building-in-the-age-of-ai-a-founders-panel@aiweek.boston": {
+    "lat": 42.355260189235,
+    "lng": -71.053874896473,
+    "address": "125 High Street, 131 Oliver St 3rd floor, Boston, MA 02110",
+    "venue": "Underscore VC Office",
+    "city": "Boston",
+    "matchedAddress": "125 HIGH ST, BOSTON, MA, 02110",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "under-the-hood-of-microsoft-scout-a-15-seat-working-session-on-corporate-ai-agen@aiweek.boston": {
+    "lat": 42.610263057168,
+    "lng": -70.666180812949,
+    "address": "33 Commercial St, Gloucester, MA 01930",
+    "venue": "Wheelhouse Cowork Harborside",
+    "city": "Gloucester",
+    "matchedAddress": "33 COMMERCIAL ST, GLOUCESTER, MA, 01930",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "film-philosophy-what-if-ai-won@aiweek.boston": {
+    "lat": 42.355325211003,
+    "lng": -71.062317674653,
+    "address": "35 Temple Pl, Boston, MA 02111",
+    "venue": "Democracy Brewing",
+    "city": "Boston",
+    "matchedAddress": "35 TEMPLE PL, BOSTON, MA, 02111",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-powered-go-to-market-engine-2026@aiweek.boston": {
+    "lat": 42.354567840791,
+    "lng": -71.054595253955,
+    "address": "99 High St, Boston, MA 02110",
+    "venue": "99 High Street",
+    "city": "Boston",
+    "matchedAddress": "99 HIGH ST, BOSTON, MA, 02110",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "founders-and-funders-bos-vc-reverse-pitch@aiweek.boston": {
+    "lat": 42.354567840791,
+    "lng": -71.054595253955,
+    "address": "99 High St, Boston, MA 02110",
+    "venue": "Downtown Boston (venue shared upon approval)",
+    "city": "Boston",
+    "matchedAddress": "99 HIGH ST, BOSTON, MA, 02110",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "tech-exit-playbook-liquidity-events-2026@aiweek.boston": {
+    "lat": 42.350393562181,
+    "lng": -71.04278318683,
+    "address": "155 Seaport Blvd, Boston, MA 02210",
+    "venue": "Foley Hoag LLP",
+    "city": "Boston",
+    "matchedAddress": "155 SEAPORT BLVD, BOSTON, MA, 02210",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "the-cost-of-intelligence-a-breakfast-briefing-on-ai-spend@aiweek.boston": {
+    "lat": 42.360878218085,
+    "lng": -71.082511352482,
+    "address": "1 Memorial Drive Cambridge, MA 02142",
+    "venue": "Microsoft New England Research and Development Center",
+    "city": "Cambridge",
+    "matchedAddress": "1 MEMORIAL DR, CAMBRIDGE, MA, 02142",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "stop-running-pilots-start-running-ai-and-unlocking-value@aiweek.boston": {
+    "lat": 42.360878218085,
+    "lng": -71.082511352482,
+    "address": "1 Memorial Drive Cambridge, MA 02142",
+    "venue": "Microsoft New England",
+    "city": "Cambridge",
+    "matchedAddress": "1 MEMORIAL DR, CAMBRIDGE, MA, 02142",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "healthcare-ai-activationTM-from-problem-to-partner-startup-showcase-matching-ses@aiweek.boston": {
+    "lat": 42.360878218085,
+    "lng": -71.082511352482,
+    "address": "1 Memorial DrCambridge, MA 02142",
+    "venue": "Microsoft New England Research and Development Center (NERD) building",
+    "city": "Cambridge",
+    "matchedAddress": "1 MEMORIAL DR, CAMBRIDGE, MA, 02142",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "healthcare-ai-activationTM@aiweek.boston": {
+    "lat": 42.360878218085,
+    "lng": -71.082511352482,
+    "address": "1 Memorial DrCambridge, MA 02142",
+    "venue": "Microsoft New England Research and Development Center (NERD) building",
+    "city": "Cambridge",
+    "matchedAddress": "1 MEMORIAL DR, CAMBRIDGE, MA, 02142",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "building-to-amplify-human-potential-in-an-ai-first-world@aiweek.boston": {
+    "lat": 42.360878218085,
+    "lng": -71.082511352482,
+    "address": "1 Memorial DrCambridge, MA 02142",
+    "venue": "Microsoft New England Research and Development Center (NERD) building",
+    "city": "Cambridge",
+    "matchedAddress": "1 MEMORIAL DR, CAMBRIDGE, MA, 02142",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "boston-openclaw-meetup@aiweek.boston": {
+    "lat": 42.360878218085,
+    "lng": -71.082511352482,
+    "address": "1 Memorial Drive, Cambridge, MA, 02142",
+    "venue": "Microsoft NERD",
+    "city": "Cambridge",
+    "matchedAddress": "1 MEMORIAL DR, CAMBRIDGE, MA, 02142",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "from-idea-to-working-software-vibe-code-like-a-product-manager@aiweek.boston": {
+    "lat": 42.351667184452,
+    "lng": -71.07174700683,
+    "address": "399 Boylston St 6th Floor, Boston, MA 02116",
+    "venue": "Workbar Back Bay",
+    "city": "Boston",
+    "matchedAddress": "399 BOYLSTON ST, BOSTON, MA, 02116",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "building-ai-that-scales-avoiding-the-multicloud-trap-red-sox-game@aiweek.boston": {
+    "lat": 42.345469615512,
+    "lng": -71.098229126618,
+    "address": "4 Jersey St, Boston, MA",
+    "venue": "Fenway Park",
+    "city": "Boston",
+    "matchedAddress": "4 JERSEY ST, BOSTON, MA, 02215",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "executive-inquiry-lab-collective-sensemaking-in-the-age-of-ai@aiweek.boston": {
+    "lat": 42.361922486893,
+    "lng": -71.082569682036,
+    "address": "100 Main Street, Cambridge, MA 02142",
+    "venue": "MIT Sloan School of Management, Building E62-233",
+    "city": "Cambridge",
+    "matchedAddress": "100 MAIN ST, CAMBRIDGE, MA, 02142",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-software-vs-physical-ai-potential-and-reality@aiweek.boston": {
+    "lat": 42.349295967736,
+    "lng": -71.083909640417,
+    "address": "275 Newbury St, FL 2, Boston, MA 02116",
+    "venue": "Glasswing Ventures",
+    "city": "Boston",
+    "matchedAddress": "275 NEWBURY ST, BOSTON, MA, 02116",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "glasswing-massopen-agentic-101-2026@aiweek.boston": {
+    "lat": 42.349295967736,
+    "lng": -71.083909640417,
+    "address": "275 Newbury St, Boston, MA 02116",
+    "venue": "Glasswing Ventures",
+    "city": "Boston",
+    "matchedAddress": "275 NEWBURY ST, BOSTON, MA, 02116",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "mvp-workshop-for-entrepreneurs@aiweek.boston": {
+    "lat": 42.349436811439,
+    "lng": -71.079555315463,
+    "address": "700 Boylston Street, Boston, MA 02116",
+    "venue": "Boston Public Library",
+    "city": "Boston",
+    "matchedAddress": "700 BOYLSTON ST, BOSTON, MA, 02116",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "lab-to-launch-rooftop-edition@aiweek.boston": {
+    "lat": 42.373554792639,
+    "lng": -71.12103520202,
+    "address": "21 Brattle Street, Harvard Square, Cambridge, MA 02138",
+    "venue": "Felipe's Taqueria (roof deck)",
+    "city": "Cambridge",
+    "matchedAddress": "21 BRATTLE ST, CAMBRIDGE, MA, 02138",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "venture-lanes-oktoberfest-2026@aiweek.boston": {
+    "lat": 42.359219115489,
+    "lng": -71.059034306806,
+    "address": "55 Court St Floor 2, Boston, MA 02108",
+    "venue": "Venture Lane",
+    "city": "Boston",
+    "matchedAddress": "55 COURT ST, BOSTON, MA, 02108",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-meet-the-investors-breakfast@aiweek.boston": {
+    "lat": 42.359219115489,
+    "lng": -71.059034306806,
+    "address": "55 Court St Floor 2, Boston, MA 02108",
+    "venue": "Venture Lane",
+    "city": "Boston",
+    "matchedAddress": "55 COURT ST, BOSTON, MA, 02108",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "how-legacy-industries-are-quietly-winning-with-ai@aiweek.boston": {
+    "lat": 42.359219115489,
+    "lng": -71.059034306806,
+    "address": "55 Court St Fl 2, Boston, MA 02108",
+    "venue": "Venture Lane",
+    "city": "Boston",
+    "matchedAddress": "55 COURT ST, BOSTON, MA, 02108",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "whiskey-wine-whiteboards-september-29@aiweek.boston": {
+    "lat": 42.359219115489,
+    "lng": -71.059034306806,
+    "address": "55 Court St Floor 2, Boston, MA 02108",
+    "venue": "Venture Lane",
+    "city": "Boston",
+    "matchedAddress": "55 COURT ST, BOSTON, MA, 02108",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-go-to-market-from-first-customers-to-repeatable-growth@aiweek.boston": {
+    "lat": 42.359219115489,
+    "lng": -71.059034306806,
+    "address": "55 Court St Floor 2, Boston, MA 02108",
+    "venue": "Venture Lane | Startup Hub",
+    "city": "Boston",
+    "matchedAddress": "55 COURT ST, BOSTON, MA, 02108",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "special-olympics-massachusetts-polar-plunge@aiweek.boston": {
+    "lat": 42.353849257131,
+    "lng": -71.048070964177,
+    "address": "85 Northern Avenue, Boston, MA",
+    "venue": "Cicso Brewers in the Seaport",
+    "city": "Boston",
+    "matchedAddress": "85 NORTHERN AVE, BOSTON, MA, 02210",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "b2b-tech-oktoberfest@aiweek.boston": {
+    "lat": 42.359219115489,
+    "lng": -71.059034306806,
+    "address": "55 Court Street, Floor 2, Boston, MA 02108",
+    "venue": "Venture Lane | Startup Hub",
+    "city": "Boston",
+    "matchedAddress": "55 COURT ST, BOSTON, MA, 02108",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "pioneers-of-ai-live-2026@aiweek.boston": {
+    "lat": 42.367618410137,
+    "lng": -71.070528792145,
+    "address": "1 Science Park, Boston, MA 02114",
+    "venue": "Museum of Science, Boston — Blue Wing",
+    "city": "Boston",
+    "matchedAddress": "1 SCIENCE PARK, BOSTON, MA, 02114",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "vizit-fireside-questrom-2026@aiweek.boston": {
+    "lat": 42.34938100837,
+    "lng": -71.100287567995,
+    "address": "595 Commonwealth Ave, Boston, MA 02215",
+    "venue": "Hariri Auditorium, BU Questrom School of Business",
+    "city": "Boston",
+    "matchedAddress": "595 COMMONWEALTH AVE, BOSTON, MA, 02215",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "the-human-edge-women-leading-in-the-age-of-ai@aiweek.boston": {
+    "lat": 42.353712627086,
+    "lng": -71.045320554434,
+    "address": "10 Fan Pier Blvd, Third Floor, Boston, MA 02210",
+    "venue": "Mass Challenge",
+    "city": "Boston",
+    "matchedAddress": "10 FAN PIER BLVD, BOSTON, MA, 02210",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "agents-in-the-am@aiweek.boston": {
+    "lat": 42.355934803605,
+    "lng": -71.057906637052,
+    "address": "33 Arch St, Boston MA 02110",
+    "venue": "WeWork",
+    "city": "Boston",
+    "matchedAddress": "33 ARCH ST, BOSTON, MA, 02110",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-transformation-in-enterprises@aiweek.boston": {
+    "lat": 42.40219030905,
+    "lng": -71.124871040961,
+    "address": "1070 Broadway, Somerville MA 02144-2078",
+    "venue": "BasisTech is a community of entrepreneurs, founders, and investors who work on small teams but appreciate the benefits of a vibrant office culture. Proximity to other innovators creates opportunities for cross-disciplinary learning and unexpected collaboration.",
+    "city": "Somerville",
+    "matchedAddress": "1070 BROADWAY, SOMERVILLE, MA, 02144",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "boston-ai-summit-2026@aiweek.boston": {
+    "lat": 42.345942486526,
+    "lng": -71.041430600704,
+    "address": "400 Summer Street, Boston, MA 02210",
+    "venue": "Foundation Medicine",
+    "city": "Boston",
+    "matchedAddress": "400 SUMMER ST, BOSTON, MA, 02210",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-and-the-next-economy@aiweek.boston": {
+    "lat": 42.349739913145,
+    "lng": -71.103208624949,
+    "address": "665 Commonwealth Avenue, Boston, MA 02215",
+    "venue": "Boston University, Duan Family Center for Computing & Data Sciences",
+    "city": "Boston",
+    "matchedAddress": "665 COMMONWEALTH AVE, BOSTON, MA, 02215",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "human-centric-ai-summit-2026@aiweek.boston": {
+    "lat": 42.360239216589,
+    "lng": -71.087084938522,
+    "address": "75 Amherst St, Cambridge, MA 02142",
+    "venue": "MIT Media Lab",
+    "city": "Cambridge",
+    "matchedAddress": "75 AMHERST ST, CAMBRIDGE, MA, 02142",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "agentic-world-cup-boston-build-ai-agents-that-play-soccer@aiweek.boston": {
+    "lat": 42.349481592488,
+    "lng": -71.050208504359,
+    "address": "27 Melcher St, Boston, MA 02210",
+    "venue": "Amazon BOS17 office building.",
+    "city": "Boston",
+    "matchedAddress": "27 MELCHER ST, BOSTON, MA, 02210",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "aws-ai-league-drug-discovery-challenge@aiweek.boston": {
+    "lat": 42.349481592488,
+    "lng": -71.050208504359,
+    "address": "27 Melcher St, Boston, MA 02210, Boston, MA 02210, 27 Melcher St, Boston, MA 02210",
+    "venue": "AWS Office BOS17 Level 1, Room 1.101",
+    "city": "Boston",
+    "matchedAddress": "27 MELCHER ST, BOSTON, MA, 02210",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-in-mechanical-engineering-and-manufacturing@aiweek.boston": {
+    "lat": 42.350204125016,
+    "lng": -71.04236218143,
+    "address": "121 Seaport Blvd, Boston, MA 02210, Floor 3",
+    "venue": "PTC",
+    "city": "Boston",
+    "matchedAddress": "121 SEAPORT BLVD, BOSTON, MA, 02210",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "second-annual-ai-drug-discovery-symposium-revolutionizing-the-future-of-medicine@aiweek.boston": {
+    "lat": 42.351035667898,
+    "lng": -71.043808004267,
+    "address": "100 Northern Avenue, Boston, Massachusetts, 02210",
+    "venue": "Goodwin",
+    "city": "Boston",
+    "matchedAddress": "100 NORTHERN AVE, BOSTON, MA, 02210",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "datarobot-build-club-boston-ai-week-edition@aiweek.boston": {
+    "lat": 42.350955326783,
+    "lng": -71.07441917193,
+    "address": "501 Boylston St, Boston, MA 02116",
+    "venue": "WeWork Boston",
+    "city": "Boston",
+    "matchedAddress": "501 BOYLSTON ST, BOSTON, MA, 02116",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "where-does-research-end-and-production-begin@aiweek.boston": {
+    "lat": 42.369874741754,
+    "lng": -71.077014668991,
+    "address": "10 Canal Park 201, Cambridge, MA",
+    "venue": "MacPaw Cambridge office",
+    "city": "Cambridge",
+    "matchedAddress": "10 CANAL PARK, CAMBRIDGE, MA, 02141",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "its-1952-again-the-missing-compiler-for-ai-pipelines-talkmeet-up-after@aiweek.boston": {
+    "lat": 42.369874741754,
+    "lng": -71.077014668991,
+    "address": "10 Canal Park 201, Cambridge, MA",
+    "venue": "MacPaw HQ",
+    "city": "Cambridge",
+    "matchedAddress": "10 CANAL PARK, CAMBRIDGE, MA, 02141",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-hub-accelerator-alpfa-boston@aiweek.boston": {
+    "lat": 42.350093054371,
+    "lng": -71.042114408512,
+    "address": "101 Seaport Blvd, Boston, MA 02210",
+    "venue": "Seaport Area",
+    "city": "Boston",
+    "matchedAddress": "101 SEAPORT BLVD, BOSTON, MA, 02210",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "the-ai-identity-shift-rebuilding-leadership-structure-and-capabilities-for-the-n@aiweek.boston": {
+    "lat": 42.383556210374,
+    "lng": -71.071822278313,
+    "address": "529 Main Street, Charlestown, MA",
+    "venue": "Bevi Headquarters at the historic Schrafft's building",
+    "city": "Boston",
+    "matchedAddress": "529 MAIN ST, CHARLESTOWN, MA, 02129",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "boston-ai-week-opening-party@aiweek.boston": {
+    "lat": 42.35060468123,
+    "lng": -71.045343999527,
+    "address": "99 Autumn Lane, Boston, MA 02210",
+    "venue": "Island Creek Oyster Raw Bar",
+    "city": "Boston",
+    "matchedAddress": "99 AUTUMN LN, BOSTON, MA, 02210",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "boston-ai-week-closing-party@aiweek.boston": {
+    "lat": 42.35060468123,
+    "lng": -71.045343999527,
+    "address": "99 Autumn Lane, Boston, MA 02210",
+    "venue": "Island Creek Oyster Raw Bar",
+    "city": "Boston",
+    "matchedAddress": "99 AUTUMN LN, BOSTON, MA, 02210",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "agentforce-salesforce-2026@aiweek.boston": {
+    "lat": 42.350393562181,
+    "lng": -71.04278318683,
+    "address": "155 Seaport Blvd, 2nd floor, Boston, MA",
+    "venue": "Kearney Boston Offices",
+    "city": "Boston",
+    "matchedAddress": "155 SEAPORT BLVD, BOSTON, MA, 02210",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "devfest-boston-2026@aiweek.boston": {
+    "lat": 42.368768647509,
+    "lng": -71.078505492016,
+    "address": "1 Education Street, Cambridge, MA 02141",
+    "venue": "Hult International Business School",
+    "city": "Cambridge",
+    "matchedAddress": "1 EDUCATION ST, CAMBRIDGE, MA, 02141",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "beyond-the-demo-the-human-side-of-ai@aiweek.boston": {
+    "lat": 42.368768647509,
+    "lng": -71.078505492016,
+    "address": "1 Education Street Cambridge, MA 02141",
+    "venue": "Hult International Business School — Boston Campus, pending final institutional and room confirmation",
+    "city": "Boston",
+    "matchedAddress": "1 EDUCATION ST, CAMBRIDGE, MA, 02141",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "hacktoberfest-2026-hack-day-with-cloudinary-cambridge@aiweek.boston": {
+    "lat": 42.366467918744,
+    "lng": -71.082086289434,
+    "address": "101 Rogers St",
+    "venue": "The Foundry, Cambridge",
+    "city": "Cambridge",
+    "matchedAddress": "101 ROGERS ST, CAMBRIDGE, MA, 02142",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "glasswing-ventures-enterprise-ready-ai-hackathon@aiweek.boston": {
+    "lat": 42.349295967736,
+    "lng": -71.083909640417,
+    "address": "275 Newbury Street, Boston, MA",
+    "venue": "Glasswing Ventures",
+    "city": "Boston",
+    "matchedAddress": "275 NEWBURY ST, BOSTON, MA, 02116",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "glasswing-ventures-enterprise-ready-ai-hackathon-day-2@aiweek.boston": {
+    "lat": 42.349295967736,
+    "lng": -71.083909640417,
+    "address": "275 Newbury Street, Boston, MA",
+    "venue": "Glasswing Ventures",
+    "city": "Boston",
+    "matchedAddress": "275 NEWBURY ST, BOSTON, MA, 02116",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "aws-startups-x-boston-ai-week-ai-visionaries-dinner@aiweek.boston": {
+    "lat": 42.342057377687,
+    "lng": -71.066046670477,
+    "address": "500 Harrison Ave, Boston, MA 02118",
+    "venue": "Capri Boston",
+    "city": "Boston",
+    "matchedAddress": "500 HARRISON AVE, BOSTON, MA, 02118",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "robot-block-party-2026@aiweek.boston": {
+    "lat": 42.353849257131,
+    "lng": -71.048070964177,
+    "address": "85 Northern Ave, Boston, MA",
+    "venue": "MassRobotics (Large Tents on parking lot)",
+    "city": "Boston",
+    "matchedAddress": "85 NORTHERN AVE, BOSTON, MA, 02210",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "code-counsels-human-in-the-loop-ping-pong-meetup@aiweek.boston": {
+    "lat": 42.349550870859,
+    "lng": -71.050081254273,
+    "address": "30 MELCHER ST., BOSTON, MA 02210",
+    "venue": "SPIN Boston (Seaport)",
+    "city": "Boston",
+    "matchedAddress": "30 MELCHER ST, BOSTON, MA, 02210",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "your-ai-chatbot-is-live-now-what@aiweek.boston": {
+    "lat": 42.415855063998,
+    "lng": -71.153832890119,
+    "address": "661 Mass Ave, 3rd FL, Arlington, MA 02476",
+    "venue": "661 Mass Ave, 3rd Floor",
+    "city": "Arlington",
+    "matchedAddress": "661 MASSACHUSETTS AVE, ARLINGTON, MA, 02476",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "recursive-learning-hackathon-2026@aiweek.boston": {
+    "lat": 42.363493595435,
+    "lng": -71.126755574168,
+    "address": "125 Western Ave, Allston, MA",
+    "venue": "Harvard Innovation Labs",
+    "city": "Boston",
+    "matchedAddress": "125 WESTERN AVE, ALLSTON, MA, 02134",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "code-counsels-legal-ai-community-hackathon-building-common-ground@aiweek.boston": {
+    "lat": 42.366467918744,
+    "lng": -71.082086289434,
+    "address": "101 Rogers St, Cambridge, MA 02142",
+    "venue": "The Foundry",
+    "city": "Cambridge",
+    "matchedAddress": "101 ROGERS ST, CAMBRIDGE, MA, 02142",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "bdmt-global-innovator-summit-2026@aiweek.boston": {
+    "lat": 42.348310815891,
+    "lng": -71.083796010998,
+    "address": "900 Boylston Street, Boston, MA",
+    "venue": "Hynes Convention Center",
+    "city": "Boston",
+    "matchedAddress": "900 BOYLSTON ST, BOSTON, MA, 02199",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "bdmt-global-innovator-summit-2026-day-2@aiweek.boston": {
+    "lat": 42.348310815891,
+    "lng": -71.083796010998,
+    "address": "900 Boylston Street, Boston, MA",
+    "venue": "Hynes Convention Center",
+    "city": "Boston",
+    "matchedAddress": "900 BOYLSTON ST, BOSTON, MA, 02199",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "bdmt-global-innovator-summit-2026-day-3@aiweek.boston": {
+    "lat": 42.348310815891,
+    "lng": -71.083796010998,
+    "address": "900 Boylston Street, Boston, MA",
+    "venue": "Hynes Convention Center",
+    "city": "Boston",
+    "matchedAddress": "900 BOYLSTON ST, BOSTON, MA, 02199",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "gai-world-2026@aiweek.boston": {
+    "lat": 42.348310815891,
+    "lng": -71.083796010998,
+    "address": "900 Boylston St, Boston, MA",
+    "venue": "Hynes Convention Center",
+    "city": "Boston",
+    "matchedAddress": "900 BOYLSTON ST, BOSTON, MA, 02199",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-education-and-the-future-of-how-we-prove-what-we-know@aiweek.boston": {
+    "lat": 42.350864454495,
+    "lng": -71.115017840671,
+    "address": "890 Commonwealth Ave, Boston, MA 02215",
+    "venue": "WBUR City Space",
+    "city": "Boston",
+    "matchedAddress": "890 COMMONWEALTH AVE, BOSTON, MA, 02215",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "2nd-annual-ai-powered-innovation-in-protein-and-antibody-therapeutics-symposium@aiweek.boston": {
+    "lat": 42.361967456108,
+    "lng": -71.100588577259,
+    "address": "20 Sidney St, Cambridge, MA 02139",
+    "venue": "Le Meridien Cambridge",
+    "city": "Cambridge",
+    "matchedAddress": "20 SIDNEY ST, CAMBRIDGE, MA, 02139",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "workforce-innovation-ai-driven-technology@aiweek.boston": {
+    "lat": 42.394193859596,
+    "lng": -71.260675055874,
+    "address": "70 3rd Ave, Waltham, MA 02451",
+    "venue": "The Westin Waltham Boston",
+    "city": "Boston",
+    "matchedAddress": "70 3RD AVE, WALTHAM, MA, 02451",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "introducing-motivation-intelligence-signal-to-power-better-ai-hosted-by-the-scie@aiweek.boston": {
+    "lat": 42.356325380178,
+    "lng": -71.059448359032,
+    "address": "1 Franklin Street, Club Lounge, Boston, MA 02110",
+    "venue": "Millennium Tower Boston, Club Lounge Theatre",
+    "city": "Boston",
+    "matchedAddress": "1 FRANKLIN ST, BOSTON, MA, 02110",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "the-human-role-in-ai-driven-businesses-c-dean-metropoulos-institute-for-technolo@aiweek.boston": {
+    "lat": 42.35419781435,
+    "lng": -71.055237067486,
+    "address": "100 High Street, Floor 12, Boston, MA 02110",
+    "venue": "Babson Boston",
+    "city": "Boston",
+    "matchedAddress": "100 HIGH ST, BOSTON, MA, 02110",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "the-trust-layer-for-ai-operations@aiweek.boston": {
+    "lat": 42.356515649538,
+    "lng": -71.05414278806,
+    "address": "260 Franklin St Ste 410, Boston, MA 02110",
+    "venue": "Alexander Technology Group",
+    "city": "Boston",
+    "matchedAddress": "260 FRANKLIN ST, BOSTON, MA, 02110",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-in-action-boston-2026@aiweek.boston": {
+    "lat": 42.348808492671,
+    "lng": -71.088949257132,
+    "address": "374 Commonwealth Ave, Boston, MA",
+    "venue": "Harvard Club of Boston",
+    "city": "Boston",
+    "matchedAddress": "374 COMMONWEALTH AVE, BOSTON, MA, 02215",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-in-oncology-from-data-to-better-patient-outcomes@aiweek.boston": {
+    "lat": 42.356270932782,
+    "lng": -71.05436066323,
+    "address": "225 Franklin Street, Boston, MA 02110",
+    "venue": "225 Franklin Street | Oxford Properties Group | Boston, MA 02110",
+    "city": "Boston",
+    "matchedAddress": "225 FRANKLIN ST, BOSTON, MA, 02110",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "from-lean-to-the-intelligent-enterprise-how-ai-is-reshaping-business-transformat@aiweek.boston": {
+    "lat": 42.3693128142,
+    "lng": -71.069225477037,
+    "address": "Two Education Cir, Cambridge, MA 02141",
+    "venue": "EF Education First",
+    "city": "Cambridge",
+    "matchedAddress": "2 EDUCATION CIR, CAMBRIDGE, MA, 02141",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "show-tell-meet-the-real-small-business-owners-using-ai@aiweek.boston": {
+    "lat": 42.356643731391,
+    "lng": -71.053603996092,
+    "address": "265 Franklin Street, Suite 1701, Boston, MA 02110",
+    "venue": "Boston Chamber of Commerce",
+    "city": "Boston",
+    "matchedAddress": "265 FRANKLIN ST, BOSTON, MA, 02110",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "ai-leadership-workshop-for-hr-learning-executives@aiweek.boston": {
+    "lat": 42.362425162557,
+    "lng": -71.085106155726,
+    "address": "245 Main St, Cambridge MA",
+    "venue": "Cambridge Innovation Center, Mosaic Room",
+    "city": "Cambridge",
+    "matchedAddress": "245 MAIN ST, CAMBRIDGE, MA, 02142",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation"
+  },
+  "science-of-scaling-hubspot-case-hbs-2026@aiweek.boston": {
+    "lat": 42.36517,
+    "lng": -71.12223,
+    "address": "Harvard Business School, Boston, MA",
+    "venue": "Harvard Business School",
+    "city": "Boston",
+    "location_accuracy": "venue",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "subconscious-launch-night-the-easy-button-for-open-models@aiweek.boston": {
+    "lat": 42.35829,
+    "lng": -71.05663,
+    "address": null,
+    "venue": "Downtown Boston",
+    "city": "Boston",
+    "location_accuracy": "approximate",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "boat-rides-boston-harbor-captain-chris-2026-09-24@aiweek.boston": {
+    "lat": 42.35391,
+    "lng": -71.04527,
+    "address": "Fan Pier, Boston, MA",
+    "venue": "Fan Pier",
+    "city": "Boston",
+    "location_accuracy": "venue",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "boat-rides-boston-harbor-captain-chris-2026-09-25@aiweek.boston": {
+    "lat": 42.35391,
+    "lng": -71.04527,
+    "address": "Fan Pier, Boston, MA",
+    "venue": "Fan Pier",
+    "city": "Boston",
+    "location_accuracy": "venue",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "simulating-cinema-with-aiemerson@aiweek.boston": {
+    "lat": 42.35182,
+    "lng": -71.06588,
+    "address": null,
+    "venue": "Emerson College",
+    "city": null,
+    "location_accuracy": "venue",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "boat-rides-boston-harbor-captain-chris-2026-09-26@aiweek.boston": {
+    "lat": 42.35391,
+    "lng": -71.04527,
+    "address": "Fan Pier, Boston, MA",
+    "venue": "Fan Pier",
+    "city": "Boston",
+    "location_accuracy": "venue",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "boat-rides-boston-harbor-captain-chris-2026-09-27@aiweek.boston": {
+    "lat": 42.35391,
+    "lng": -71.04527,
+    "address": "Fan Pier, Boston, MA",
+    "venue": "Fan Pier",
+    "city": "Boston",
+    "location_accuracy": "venue",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "boat-rides-boston-harbor-captain-chris-2026-09-28@aiweek.boston": {
+    "lat": 42.35391,
+    "lng": -71.04527,
+    "address": "Fan Pier, Boston, MA",
+    "venue": "Fan Pier",
+    "city": "Boston",
+    "location_accuracy": "venue",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "women-in-ai-breakfast-gai-world-2026@aiweek.boston": {
+    "lat": 42.34756,
+    "lng": -71.08435,
+    "address": "900 Boylston Street, Boston, MA 02115",
+    "venue": "Hynes Convention Center",
+    "city": "Boston",
+    "location_accuracy": "venue",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "gai-world-2026-day-2@aiweek.boston": {
+    "lat": 42.34756,
+    "lng": -71.08435,
+    "address": null,
+    "venue": "Hynes Convention Center",
+    "city": null,
+    "location_accuracy": "venue",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "boat-rides-boston-harbor-captain-chris-2026-09-29@aiweek.boston": {
+    "lat": 42.35391,
+    "lng": -71.04527,
+    "address": "Fan Pier, Boston, MA",
+    "venue": "Fan Pier",
+    "city": "Boston",
+    "location_accuracy": "venue",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "gai-world-2026-day-3@aiweek.boston": {
+    "lat": 42.34756,
+    "lng": -71.08435,
+    "address": null,
+    "venue": "Hynes Convention Center",
+    "city": null,
+    "location_accuracy": "venue",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "boat-rides-boston-harbor-captain-chris-2026-09-30@aiweek.boston": {
+    "lat": 42.35391,
+    "lng": -71.04527,
+    "address": "Fan Pier, Boston, MA",
+    "venue": "Fan Pier",
+    "city": "Boston",
+    "location_accuracy": "venue",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "an-evening-with-bostons-ai-data-leaders@aiweek.boston": {
+    "lat": 42.34519,
+    "lng": -71.04198,
+    "address": "Seaport District, Boston",
+    "venue": "Seaport District, Venue to be provided with registration.",
+    "city": "Boston",
+    "location_accuracy": "approximate",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "dataiq-peer-exchange-boston-2026@aiweek.boston": {
+    "lat": 42.35137,
+    "lng": -71.08185,
+    "address": "The Quin House, Boston, MA",
+    "venue": "The Quin House",
+    "city": "Boston",
+    "location_accuracy": "venue",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "boat-rides-boston-harbor-captain-chris-2026-10-01@aiweek.boston": {
+    "lat": 42.35391,
+    "lng": -71.04527,
+    "address": "Fan Pier, Boston, MA",
+    "venue": "Fan Pier",
+    "city": "Boston",
+    "location_accuracy": "venue",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "boat-rides-boston-harbor-captain-chris-2026-10-02@aiweek.boston": {
+    "lat": 42.35391,
+    "lng": -71.04527,
+    "address": "Fan Pier, Boston, MA",
+    "venue": "Fan Pier",
+    "city": "Boston",
+    "location_accuracy": "venue",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "authors-innovators-all-day-book-preview-2026@aiweek.boston": {
+    "lat": 42.29904,
+    "lng": -71.18722,
+    "address": "UMass Amherst Mount Ida Campus, Newton, MA",
+    "venue": "UMass Amherst — Mount Ida Campus",
+    "city": "Newton",
+    "location_accuracy": "venue",
+    "source": "User-supplied verified venue coordinates, event-coords-pass2.sql, 2026-09-16; campus/pier locations are not confirmed entrances"
+  },
+  "starburst-ai-meetup-building-an-agent-for-your-data-the-good-the-bad-the-ugly@aiweek.boston": {
+    "lat": 42.354985410831,
+    "lng": -71.056421106553,
+    "address": "101 Federal Street, Boston, MA 02210",
+    "venue": "Starburst HQ",
+    "city": "Boston",
+    "matchedAddress": "101 FEDERAL ST, BOSTON, MA, 02110",
+    "source": "US Census Geocoder exact match, corrected address formatting, 2026-09-16; street-range interpolation"
+  },
+  "hey-hub-come-here-bostons-voice-ai-meetup@aiweek.boston": {
+    "lat": 42.353859354634,
+    "lng": -71.059836477203,
+    "address": "38 Chauncey Street, Boston, MA (Downtown Crossing)",
+    "venue": "Build617",
+    "city": "Boston",
+    "matchedAddress": "38 CHAUNCY ST, BOSTON, MA, 02111",
+    "source": "US Census Geocoder exact match, corrected address formatting, 2026-09-16; street-range interpolation"
+  },
+  "clawbio-developing-your-own-genomic-agent-from-scratch@aiweek.boston": {
+    "lat": 42.366278317819,
+    "lng": -71.087588940527,
+    "address": "300B Binney St, Cambridge, MA 02142",
+    "venue": "Broad Institute",
+    "city": "Cambridge",
+    "matchedAddress": "300 BINNEY ST, CAMBRIDGE, MA, 02142",
+    "source": "US Census Geocoder exact match, corrected address formatting, 2026-09-16; street-range interpolation"
+  },
+  "ai-native-dev-boston-inside-the-dark-factory@aiweek.boston": {
+    "lat": 42.353576521994,
+    "lng": -71.057659249623,
+    "address": "100 Summer Street, 100 Summer St, Boston",
+    "venue": "Snyk Boston office",
+    "city": "Boston",
+    "matchedAddress": "100 SUMMER ST, BOSTON, MA, 02110",
+    "source": "US Census Geocoder exact match, corrected address formatting, 2026-09-16; street-range interpolation"
+  },
+  "behavior-adaptation-strategies-for-language-models-in-high-sensitivity-and-vulne@aiweek.boston": {
+    "lat": 42.366467918744,
+    "lng": -71.082086289434,
+    "address": "Cambridge, Roger's st Cambridge ma 02141",
+    "venue": "The Foundry",
+    "city": "Cambridge",
+    "matchedAddress": "101 ROGERS ST, CAMBRIDGE, MA, 02142",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation; identical named venue elsewhere in catalog"
+  },
+  "the-missing-layer-ai-governance-as-organizational-architecture@aiweek.boston": {
+    "lat": 42.348808492671,
+    "lng": -71.088949257132,
+    "address": "374 Commonwealth Ave, Boston, MA 02115",
+    "venue": "Harvard Club of Boston",
+    "city": "Boston",
+    "matchedAddress": "374 COMMONWEALTH AVE, BOSTON, MA, 02215",
+    "source": "US Census Geocoder, Public_AR_Current, 2026-09-16; street-range interpolation; identical named venue elsewhere in catalog"
+  }
+}

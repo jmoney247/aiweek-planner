@@ -1,15 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import { useSessionGate } from './SessionGateProvider';
+import { communityRequest } from '@/lib/community-client';
+import ProfilePanel from './ProfilePanel';
 
 export default function SiteFooter() {
   const [kind, setKind] = useState<"review" | "improvement" | null>(null);
   const [message, setMessage] = useState("");
   const [openedEmail, setOpenedEmail] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const { requireSession } = useSessionGate();
   const openForm = (next: "review" | "improvement") => {
     setKind(next);
     setMessage("");
     setOpenedEmail(false);
+    setError('');
   };
   const link = "inline-flex min-h-[44px] items-center text-sm font-semibold text-pink hover:underline";
 
@@ -46,24 +53,29 @@ export default function SiteFooter() {
 
         <div id="site-feedback">
           {kind && (
-            <form className="mt-5 max-w-2xl rounded-2xl border border-stone-200 bg-white p-5" onSubmit={(event) => {
+            <form className="mt-5 max-w-2xl rounded-2xl border border-stone-200 bg-white p-5" onSubmit={async (event) => {
               event.preventDefault();
-              const subject = kind === "review" ? "Boston AI Week Planner — Website review" : "Boston AI Week Planner — Improvement suggestion";
-              window.location.href = `mailto:joshua19solomon@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message.trim())}`;
-              setOpenedEmail(true);
+              setBusy(true); setError('');
+              try {
+                if (!await requireSession()) return;
+                await communityRequest('/api/feedback', { method: 'POST', headers: { 'content-type':'application/json' }, body: JSON.stringify({ kind, body: message.trim() }) });
+                setOpenedEmail(true); setMessage('');
+              } catch(e) { setError((e as Error).message); } finally { setBusy(false); }
             }}>
               <h2 className="text-lg font-bold">{kind === "review" ? "Review the website" : "Help make this better"}</h2>
-              <p className="mt-1 text-sm text-ink-soft">This feedback goes to Joshua by email. For event experiences, use the comments on that event.</p>
+              <p className="mt-1 text-sm text-ink-soft">This website feedback is saved privately for Joshua. For event experiences, use the community posts on that event.</p>
               <label htmlFor="site-feedback-message" className="mb-2 mt-4 block text-sm font-semibold">{kind === "review" ? "How was your experience using the planner?" : "What would you like to improve?"}</label>
               <textarea autoFocus id="site-feedback-message" value={message} onChange={(event) => { setMessage(event.target.value); setOpenedEmail(false); }} required minLength={3} maxLength={2000} rows={4} className="w-full rounded-xl border border-stone-300 p-3" />
               <div className="mt-3 flex flex-wrap gap-3">
-                <button className="min-h-[44px] rounded-full bg-pink px-5 font-semibold text-ink" type="submit">Continue in email</button>
+                <button disabled={busy} className="min-h-[44px] rounded-full bg-pink px-5 font-semibold text-ink" type="submit">{busy ? 'Sending…' : 'Send feedback'}</button>
                 <button className="min-h-[44px] rounded-full border border-stone-300 px-5" type="button" onClick={() => setKind(null)}>Close</button>
               </div>
-              {openedEmail && <p role="status" className="mt-3 text-sm text-ink-soft">Your email app should open with your message. Send it there to finish. If nothing opens, email joshua19solomon@gmail.com directly; your message is still here.</p>}
+              {openedEmail && <p role="status" className="mt-3 text-sm text-ink-soft">Thank you—your feedback has been saved for Joshua.</p>}
+              {error && <p role="alert">{error}</p>}
             </form>
           )}
         </div>
+        <div className="mt-6 max-w-2xl"><ProfilePanel /></div>
       </div>
     </footer>
   );

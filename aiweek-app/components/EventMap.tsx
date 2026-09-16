@@ -31,17 +31,25 @@ function isVirtual(e: EventWithStats): boolean {
 }
 
 interface Props {
+  focusEventId?: string | null;
   events: EventWithStats[];
   loading?: boolean;
   error?: string | null;
   onRetry?: () => void;
 }
 
-export default function EventMap({ events, loading = false, error = null, onRetry }: Props) {
+export default function EventMap({ events, loading = false, error = null, onRetry, focusEventId }: Props) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [fullscreen, setFullscreen] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
+  const focused = useRef<string | null>(null);
+  useEffect(() => {
+    if (!focusEventId) focused.current = null;
+    if (focusEventId && focused.current !== focusEventId && events.some(e => e.id === focusEventId)) {
+      setSelectedId(focusEventId); focused.current = focusEventId;
+    }
+  }, [focusEventId, events]);
 
   const { pinned, listEvents, virtualCount, noCoordCount } = useMemo(() => {
     const pinned: MappedEvent[] = [];
@@ -65,8 +73,8 @@ export default function EventMap({ events, loading = false, error = null, onRetr
 
   useEffect(() => {
     if (!selectedId || !listRef.current) return;
-    const el = listRef.current.querySelector(`[data-event-id="${selectedId}"]`);
-    el?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    const el = Array.from(listRef.current.querySelectorAll<HTMLElement>('[data-event-id]')).find(el => el.dataset.eventId === selectedId);
+    el?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: "nearest" });
   }, [selectedId]);
 
   const mapShell = (
@@ -91,7 +99,7 @@ export default function EventMap({ events, loading = false, error = null, onRetr
         {!loading && !error && pinned.length === 0 && (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center p-6">
             <div className="pointer-events-auto max-w-sm rounded-2xl border border-zinc-200 bg-white/95 p-5 text-center shadow-lg backdrop-blur">
-              <p className="font-bold text-plum">📍 No map pins yet</p>
+              <p className="font-bold text-plum">{listEvents.length ? 'No mapped locations for these events' : 'No events match your filters'}</p>
               <p className="mt-2 text-sm text-ink-soft">
                 {noCoordCount > 0
                   ? `${noCoordCount} event${noCoordCount === 1 ? "" : "s"} still need coordinates — browse them in the list →`
@@ -139,7 +147,7 @@ export default function EventMap({ events, loading = false, error = null, onRetr
     <div className={fullscreen ? "" : "relative isolate overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-card"}>
       <div className={`flex flex-col ${fullscreen ? "h-screen" : "lg:flex-row lg:h-[min(72vh,720px)]"}`}>
         {/* Map column ~68% */}
-        <div className={`relative ${fullscreen ? "flex-1" : "h-[45vh] lg:h-auto lg:w-[68%]"}`}>
+        <div className={`relative ${fullscreen ? "flex-1" : "h-[420px] lg:h-auto lg:w-[68%]"}`}>
           {mapShell}
           {!fullscreen && (
             <button

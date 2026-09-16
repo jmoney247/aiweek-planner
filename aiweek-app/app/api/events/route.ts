@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { HttpError, handleRoute } from "@/lib/http";
 import { requireAnonClient } from "@/lib/db";
 import type { EventStatsShape } from "@/lib/community";
+import { eventCoordinates } from "@/lib/event-coordinates";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -129,6 +130,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     const events = page.map((e) => ({
       // Project only public fields; older catalogs may not yet have coordinates.
       ...Object.fromEntries(EVENT_COLUMNS.split(", ").map((key) => [key, e[key] ?? null])),
+      ...eventCoordinates(e),
       stats: statsById.get(e.id as string) ?? { likes: 0, dislikes: 0, comment_count: 0 },
     }));
 

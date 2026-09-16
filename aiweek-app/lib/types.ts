@@ -44,6 +44,7 @@ export interface Event {
    */
   lat: number | null;
   lng: number | null;
+  location_accuracy?: string | null;
 }
 
 export interface Speaker {

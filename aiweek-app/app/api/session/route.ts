@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { randomInt } from 'node:crypto';
 import { HttpError, err, handleRoute, readJson, unauthorized } from "@/lib/http";
 import { requireServiceClient } from "@/lib/db";
 import { displayNameInputSchema, zodMessage } from "@/lib/validation";
@@ -44,8 +45,13 @@ function cleanDisplayName(raw: unknown): string {
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
   return handleRoute(async () => {
+    const current = await getSessionUser(req);
+    if (current) return NextResponse.json({ user: { id: current.userId, display_name: current.displayName } });
     const body = await readJson(req);
-    const parsed = displayNameInputSchema.safeParse(body);
+    const adjectives = ['Sunny', 'Curious', 'Friendly', 'Happy', 'Kind', 'Bright'];
+    const animals = ['Otter', 'Robin', 'Fox', 'Puffin', 'Owl', 'Dolphin'];
+    const generated = `${adjectives[randomInt(adjectives.length)]} ${animals[randomInt(animals.length)]} ${randomInt(100, 1000)}`;
+    const parsed = displayNameInputSchema.safeParse(body && typeof body === 'object' && 'display_name' in body ? body : { display_name: generated });
     if (!parsed.success) return err(400, zodMessage(parsed.error));
     const displayName = cleanDisplayName(parsed.data.display_name);
 

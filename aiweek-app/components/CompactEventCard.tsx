@@ -10,6 +10,7 @@ import { formatEventDate, formatLocation } from "@/lib/format";
 import { isSaved, onSavedChange, saveEvent, unsaveEvent } from "@/lib/saved";
 import type { EventWithStats } from "@/lib/api";
 import CommentsDrawer from "@/components/CommentsDrawer";
+import Link from 'next/link';
 
 interface Props {
   event: EventWithStats;
@@ -57,7 +58,7 @@ function SaveButton({ event }: { event: EventWithStats }) {
       }}
       aria-pressed={saved}
       aria-label={saved ? "Remove from My Plan" : "Save to My Plan"}
-      className="inline-flex min-h-[36px] min-w-[36px] items-center justify-center rounded-full border border-zinc-200 text-lg hover:bg-canvas-soft"
+      className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-zinc-200 text-lg hover:bg-canvas-soft"
     >
       <span aria-hidden="true" className={saved ? "text-pink" : "text-zinc-400"}>
         {saved ? "★" : "☆"}
@@ -125,13 +126,16 @@ export default function CompactEventCard({
         {location && (
           <p className="truncate text-xs text-ink-muted">📍 {location}</p>
         )}
+        {event.location_accuracy === 'approximate' && <p className="text-xs text-ink-soft">Approximate district location</p>}
+        {event.lat == null && <p className="text-xs text-ink-soft">Location not mapped yet</p>}
+        <Link onClick={e => e.stopPropagation()} className="inline-flex min-h-[44px] items-center text-sm text-pink underline" href={`/events/${encodeURIComponent(event.id)}`}>Event details</Link>
         <button
           type="button"
           onClick={(e) => { e.stopPropagation(); setCommentsOpen(true); }}
           aria-label={`Read comments about ${title}`}
           className="mt-1 inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold text-pink hover:underline"
         >
-          <span aria-hidden="true">💬</span> {event.stats?.comment_count ?? 0} comments
+          <span aria-hidden="true">💬</span> {event.stats?.comment_count ?? 0} community posts
         </button>
         <div className="mt-2 flex items-center gap-2">
           <span className="inline-flex items-center gap-1 text-xs text-ink-soft">
@@ -140,7 +144,7 @@ export default function CompactEventCard({
           </span>
           <div className="ml-auto flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
             <SaveButton event={event} />
-            <RegisterButton event={event} className="!min-h-[36px] !px-3 !py-1 !text-xs" />
+            <RegisterButton event={event} className="!min-h-[44px] !px-3 !py-1 !text-xs" />
           </div>
         </div>
       </div>

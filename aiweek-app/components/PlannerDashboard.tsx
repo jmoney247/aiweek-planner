@@ -2,9 +2,11 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from 'next/navigation';
 import EventFiltersBar from "@/components/EventFilters";
 import EventMap from "@/components/EventMap";
 import TrendingSection from "@/components/TrendingSection";
+import CommunityFeed from '@/components/CommunityFeed';
 import { fetchAllEvents, type EventWithStats } from "@/lib/api";
 import {
   DEFAULT_FILTERS,
@@ -18,10 +20,22 @@ import {
 } from "@/lib/filters";
 
 export default function PlannerDashboard() {
+  const requestedEvent = useSearchParams().get('event');
   const [events, setEvents] = useState<EventWithStats[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState<EventFilters>(DEFAULT_FILTERS);
+  const [focusEventId, setFocusEventId] = useState<string | null>(null);
+  useEffect(() => {
+    const readTarget = () => {
+      const id = new URLSearchParams(window.location.search).get('event');
+      setFocusEventId(id);
+      if (id) setFilters(DEFAULT_FILTERS);
+    };
+    readTarget();
+    window.addEventListener('popstate', readTarget); window.addEventListener('hashchange', readTarget);
+    return () => { window.removeEventListener('popstate', readTarget); window.removeEventListener('hashchange', readTarget); };
+  }, [requestedEvent]);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -76,8 +90,7 @@ export default function PlannerDashboard() {
       </p>
       <nav aria-label="Explore the planner" className="mt-5 flex flex-wrap gap-3">
         <a href="#map" className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-pink px-5 font-semibold text-ink">Map &amp; events <span aria-hidden="true">↓</span></a>
-        <Link href="/gallery" className="inline-flex min-h-[44px] items-center rounded-full border border-pink/40 bg-white px-5 font-semibold text-ink">Event gallery</Link>
-        <Link href="/gallery#community" className="inline-flex min-h-[44px] items-center rounded-full border border-pink/40 bg-white px-5 font-semibold text-ink">Community comments</Link>
+        <Link href="/gallery" className="inline-flex min-h-[44px] items-center rounded-full border border-pink/40 bg-white px-5 font-semibold text-ink">What people are saying</Link>
       </nav>
 
       <div className="mt-6">
@@ -93,12 +106,14 @@ export default function PlannerDashboard() {
       <section id="map" aria-label="Event map" className="mt-4 scroll-mt-24">
         <EventMap
           events={filtered}
+          focusEventId={focusEventId}
           loading={loading}
           error={error}
           onRetry={() => void load()}
         />
       </section>
       {!loading && !error && <TrendingSection events={trending} />}
+      <div className="mt-10"><CommunityFeed /></div>
     </div>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import CommunityBar from "@/components/CommunityBar";
+import Link from 'next/link';
 import { formatEventDate, formatLocation, isLiveNow, trimText } from "@/lib/format";
 import { isSaved, saveEvent, unsaveEvent, onSavedChange } from "@/lib/saved";
 import type { Event } from "@/lib/types";
@@ -245,6 +246,7 @@ export default function EventCard({ event }: { event: Event }) {
         </div>
 
         <div className="mt-3 border-t border-zinc-100 pt-2">
+          <div className="flex flex-wrap gap-4 text-sm text-pink"><Link className="inline-flex min-h-[44px] items-center underline" href={`/events/${encodeURIComponent(event.id)}`}>Event details & experiences</Link><Link className="inline-flex min-h-[44px] items-center underline" href={`/?event=${encodeURIComponent(event.id)}#map`}>View on map</Link></div>
           <CommunityBar eventId={event.id} />
         </div>
       </div>

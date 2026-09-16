@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import L from "leaflet";
 import type { Event } from "@/lib/types";
+import { clusterize, type MapCluster } from '@/lib/map-clusters';
 
 export interface MappedEvent extends Event {
   lat: number;
@@ -41,8 +42,8 @@ const BOSTON: [number, number] = [42.3601, -71.0589];
 const PINK = "#FF8A3D";
 const HERO = "linear-gradient(135deg,#FF8A3D,#FFE2CC,#FFF0B3)";
 
-function pinIcon(selected: boolean, hovered: boolean, live: boolean): L.DivIcon {
-  const size = selected || hovered ? 40 : 32;
+function pinIcon(selected: boolean, hovered: boolean, live: boolean, approximate: boolean): L.DivIcon {
+  const size = selected || hovered ? 48 : 44;
   const liveDot = live
     ? `<span style="position:absolute;top:-3px;right:-3px;width:12px;height:12px;border-radius:9999px;background:#23633E;border:2px solid #fff;"></span>`
     : "";
@@ -52,7 +53,7 @@ function pinIcon(selected: boolean, hovered: boolean, live: boolean): L.DivIcon 
       `<div style="position:relative;width:${size}px;height:${size}px;">` +
       `<div style="width:${size}px;height:${size}px;border-radius:9999px;` +
       `background:${selected ? HERO : PINK};` +
-      `border:3px solid #fff;box-shadow:0 2px 8px rgba(58,24,62,.25);` +
+      `border:3px ${approximate ? 'dashed' : 'solid'} #fff;box-shadow:0 2px 8px rgba(58,24,62,.25);` +
       `display:flex;align-items:center;justify-content:center;` +
       `${selected ? "outline:3px solid rgba(109,59,25,.45);outline-offset:2px;" : ""}">` +
       `<span style="width:10px;height:10px;border-radius:9999px;background:#fff;"></span>` +
@@ -76,37 +77,7 @@ function clusterIcon(count: number, active = false): L.DivIcon {
   });
 }
 
-interface Cluster {
-  key: string;
-  lat: number;
-  lng: number;
-  events: MappedEvent[];
-}
-
-function gridSizeForZoom(zoom: number): number | null {
-  if (zoom < 12) return 0.06;
-  if (zoom < 14) return 0.02;
-  if (zoom < 16) return 0.008;
-  return null;
-}
-
-function clusterize(events: MappedEvent[], zoom: number): Cluster[] {
-  const grid = gridSizeForZoom(zoom);
-  const cells = new Map<string, MappedEvent[]>();
-  for (const e of events) {
-    // Exact coordinates stay grouped even at maximum zoom: no overlapping pins.
-    const key = grid === null ? `venue:${e.lat}:${e.lng}` : `${Math.round(e.lat / grid)}:${Math.round(e.lng / grid)}`;
-    const list = cells.get(key) ?? [];
-    list.push(e);
-    cells.set(key, list);
-  }
-  return [...cells.entries()].map(([key, list]) => ({
-    key,
-    lat: list.reduce((s, e) => s + e.lat, 0) / list.length,
-    lng: list.reduce((s, e) => s + e.lng, 0) / list.length,
-    events: list,
-  }));
-}
+type Cluster = MapCluster<MappedEvent>;
 
 function ClusterLayer({
   events,
@@ -123,6 +94,14 @@ function ClusterLayer({
 }) {
   const map = useMap();
   const [zoom, setZoom] = useState(map.getZoom());
+  const framed = useRef(false);
+  useEffect(() => {
+    if (!framed.current && events.length) {
+      map.fitBounds(L.latLngBounds(events.map(e => [e.lat, e.lng] as [number, number])), { padding: [36, 36], maxZoom: 14, animate: false });
+      setZoom(map.getZoom());
+      framed.current = true;
+    }
+  }, [map, events]);
 
   useEffect(() => {
     const update = () => setZoom(map.getZoom());
@@ -141,7 +120,9 @@ function ClusterLayer({
   }, [map, selectedId, events]);
 
   const activateCluster = (cluster: Cluster) => {
-    map.setView([cluster.lat, cluster.lng], Math.min(map.getZoom() + 1, 18), { animate: !reduceMotion() });
+    const bounds = L.latLngBounds(cluster.events.map(e => [e.lat, e.lng] as [number, number]));
+    const target = Math.min(18, Math.max(map.getZoom() + 1, map.getBoundsZoom(bounds, false, L.point(60, 60))));
+    map.setView(bounds.getCenter(), target, { animate: !reduceMotion() });
   };
 
   const sameLocation = (cluster: Cluster) => cluster.events.every((event) => event.lat === cluster.events[0].lat && event.lng === cluster.events[0].lng);
@@ -156,9 +137,10 @@ function ClusterLayer({
             icon={pinIcon(
               selectedId === c.events[0].id,
               hoveredId === c.events[0].id,
-              isLive(c.events[0])
+              isLive(c.events[0]),
+              c.events[0].location_accuracy === 'approximate'
             )}
-            title={c.events[0].display_title || c.events[0].title}
+            title={`${c.events[0].display_title || c.events[0].title}${c.events[0].location_accuracy === 'approximate' ? ' — approximate district location' : ''}`}
             alt={`Event: ${c.events[0].display_title || c.events[0].title}`}
             keyboard
             eventHandlers={{
@@ -227,7 +209,10 @@ interface Props {
 }
 
 export default function MapView({ events, selectedId, hoveredId, onSelect, onHover }: Props) {
+  const [tilesFailed, setTilesFailed] = useState(false);
+  const [tileRevision, setTileRevision] = useState(0);
   return (
+    <div className="relative h-full w-full">
     <MapContainer
       center={BOSTON}
       zoom={13}
@@ -239,6 +224,8 @@ export default function MapView({ events, selectedId, hoveredId, onSelect, onHov
       <IconFix />
       <ResizeFix />
       <TileLayer
+        key={tileRevision}
+        eventHandlers={{ tileerror: () => setTilesFailed(true) }}
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
@@ -250,5 +237,7 @@ export default function MapView({ events, selectedId, hoveredId, onSelect, onHov
         onHover={onHover}
       />
     </MapContainer>
+    {tilesFailed && <div role="status" className="absolute bottom-12 left-3 right-3 z-[500] rounded-xl border bg-white p-3 text-sm shadow">Some map tiles couldn’t load. Event cards are still available. <button className="min-h-[44px] underline" onClick={() => { setTilesFailed(false); setTileRevision(r => r+1); }}>Retry map tiles</button></div>}
+    </div>
   );
 }
