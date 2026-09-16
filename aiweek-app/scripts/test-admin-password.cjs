@@ -1,0 +1,28 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const vm = require('node:vm');
+const crypto = require('node:crypto');
+const ts = require('typescript');
+const env = { ADMIN_PASSWORD: 'test-password-only', SUPABASE_SERVICE_ROLE_KEY: crypto.randomBytes(32).toString('hex'), NODE_ENV: 'production' };
+class HttpError extends Error { constructor(status, message) { super(message); this.status = status; } }
+const moduleObject = { exports: {} };
+vm.runInNewContext(ts.transpileModule(fs.readFileSync('lib/admin-auth.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } }).outputText, { exports: moduleObject.exports, module: moduleObject, Buffer, process: { env }, require: name => name === 'node:crypto' ? crypto : { HttpError } });
+const a = moduleObject.exports;
+assert.equal(a.checkAdminPassword('wrong'), false);
+assert.equal(a.checkAdminPassword('test-password-only'), true);
+const now = Date.now(), token = a.createAdminToken(now);
+assert.equal(a.validAdminToken(token, now), true);
+assert.equal(a.validAdminToken(token, now + a.ADMIN_TTL * 1000), false);
+assert.equal(a.validAdminToken(token + 'x', now), false);
+assert.equal(a.validAdminToken(token.slice(0, -1) + (token.endsWith('0') ? '1' : '0'), now), false);
+assert.equal(a.validAdminToken(undefined, now), false);
+assert.throws(() => a.requireAdmin({ cookies: { get: () => undefined } }), e => e.status === 401);
+assert.throws(() => a.requireAdminOrigin({ headers: { get: () => 'https://evil.example' }, nextUrl: { origin: 'https://knowthehype.com' } }), e => e.status === 403);
+a.requireAdmin({ cookies: { get: () => ({ value: token }) } });
+const cookie = a.adminCookieOptions();
+assert(cookie.httpOnly && cookie.secure); assert.equal(cookie.sameSite, 'strict'); assert.equal(cookie.path, '/api/admin');
+env.ADMIN_PASSWORD = 'new-password'; assert.equal(a.validAdminToken(token, now), false);
+delete env.ADMIN_PASSWORD;
+assert.throws(() => a.checkAdminPassword('anything'), e => e.status === 503);
+assert.equal(a.validAdminToken(token, now), false);
+console.log('PASS: correct/wrong passwords, missing configuration, tampering, expiry, password rotation, cookie security, origin checks, and unauthenticated access denial.');

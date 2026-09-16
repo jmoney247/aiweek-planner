@@ -1,31 +1,25 @@
-# Joshua Solomon admin setup
+# Password-only admin
+The admin page now uses a shared server-side password. The previous email login is no longer used by the app.
 
-This feature is not active until the database migration is applied. No production database change was made while implementing it.
+## Activate
+1. In Vercel, open aiweek-planner → Settings → Environment Variables.
+2. Add ADMIN_PASSWORD with Joshua's chosen password. Select Production (and Preview if you want to test there). Do not use a NEXT_PUBLIC_ prefix or commit the value to Git.
+3. The existing SUPABASE_SERVICE_ROLE_KEY and NEXT_PUBLIC_SUPABASE_URL must also be configured server-side.
+4. Publish these code changes and redeploy after saving the variable.
+5. Open https://knowthehype.com/admin, enter the password, and select Open dashboard.
 
-1. In Supabase Authentication, invite/create Joshua's account using `joshua19solomon@gmail.com`. Joshua must verify ownership through the email flow. Do not share passwords or sign-in links in chat.
-2. In Authentication URL Configuration, set the production Site URL and allow the exact `https://YOUR-SITE/admin` redirect. Add an exact trusted preview `/admin` URL only if needed. Do not allow broad untrusted wildcard redirects.
-3. After approving the additive database change, run `supabase/migrations/0004_private_admin.sql` once in the Supabase SQL editor. It creates a private account allowlist and a restricted analytics function; it does not alter events or community data. The migration enrolls Joshua only if his verified Auth account already exists.
-4. If the migration ran before account verification, enroll the now-verified account using the following owner-only SQL:
+No admin SQL migration, email confirmation, or auth redirect setup is required for this flow. The previous 0004 migration can remain if already applied; this implementation does not call its RPC or change its permissions.
 
-```sql
-insert into private.admin_accounts(user_id)
-select id from auth.users
-where lower(email) = 'joshua19solomon@gmail.com'
-  and email_confirmed_at is not null
-on conflict do nothing;
-```
+## Security
+- Every analytics request must carry a valid, signed admin cookie before any database query runs.
+- The cookie is HttpOnly, Secure in production, SameSite=Strict, limited to /api/admin, and expires after eight hours.
+- The signing key is derived from the existing server-only service key and admin password. Changing either invalidates old sessions.
+- Login passwords are compared using scrypt and constant-time comparison. Passwords and tokens are not logged or sent in URLs.
+- Login/logout require same-origin requests. Login request bodies are limited to 1 KB.
+- Five attempts per IP per 15 minutes are allowed per server instance. This in-memory backstop is not a globally shared limit on serverless hosting; add a Vercel Firewall rate limit on POST /api/admin/session for durable edge enforcement.
+- This is a shared-password model: anyone with the password can access dashboard totals. It does not verify a personal identity.
+- Database tables remain under their existing grants/RLS. Only the authorized server route uses the service-role key. Public visitor profiles do not grant admin access.
+- Logout clears the browser cookie; a copied cookie remains valid until expiry or password rotation.
+- The dashboard shows event/community aggregate totals, not page-view tracking or a raw database export.
 
-5. Visit `/admin`, request a one-time link, and open it in the same browser that requested it (PKCE). Alternatively, use Joshua's existing Supabase Auth password. Configure Supabase email delivery/SMTP if emails cannot be delivered to this address. No signup or auto-created account is exposed by the page.
-6. Verify in a signed-out browser that only the login form appears. An unrelated authenticated account must receive an access-denied error from `admin_analytics`, even when calling the database directly. Sign out on shared computers.
-
-## Security boundaries
-
-- The dashboard uses the public Supabase key plus Joshua's authenticated JWT, never the service-role key.
-- PostgreSQL checks `auth.uid()` against the private allowlist and the current verified email in `auth.users`. User-editable profile metadata is never trusted for authorization.
-- Public and anonymous execution are revoked. Authenticated users may call the function, but only the enrolled Joshua account passes its internal authorization check. Raw private tables remain inaccessible.
-- Accounts are pinned by UUID: deleting/recreating an account with the same email does not automatically grant access. To revoke access, delete its row from `private.admin_accounts` using the SQL editor.
-- The analytics are on-demand aggregate counts. No new visitor tracking, personal-data export, or moderation controls are included. Existing public event/comment counts remain public as before.
-- Admin auth is stored separately from anonymous browser profiles. The `/admin` URL and noindex metadata are not access controls. All actual analytics reads are authorized in PostgreSQL.
-- Run `node scripts/test-admin-security.mjs` for database permission tests. Real email delivery and login require testing against the configured Supabase project after setup.
-
-References: https://supabase.com/docs/guides/auth/auth-email-passwordless and https://supabase.com/docs/guides/database/functions
+Run node scripts/test-admin-password.cjs and npm run build before publishing.
