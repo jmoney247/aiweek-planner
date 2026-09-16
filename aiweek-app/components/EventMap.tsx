@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import CompactEventCard from "@/components/CompactEventCard";
 import EventDrawer from "@/components/EventDrawer";
@@ -22,7 +21,7 @@ function hasCoords(e: EventWithStats): e is MappedEvent {
     typeof e.lat === "number" &&
     typeof e.lng === "number" &&
     Number.isFinite(e.lat) &&
-    Number.isFinite(e.lng)
+    Number.isFinite(e.lng) && Math.abs(e.lat) <= 90 && Math.abs(e.lng) <= 180
   );
 }
 
@@ -137,7 +136,7 @@ export default function EventMap({ events, loading = false, error = null, onRetr
   }
 
   return (
-    <div className={fullscreen ? "" : "overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-card"}>
+    <div className={fullscreen ? "" : "relative isolate overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-card"}>
       <div className={`flex flex-col ${fullscreen ? "h-screen" : "lg:flex-row lg:h-[min(72vh,720px)]"}`}>
         {/* Map column ~68% */}
         <div className={`relative ${fullscreen ? "flex-1" : "h-[45vh] lg:h-auto lg:w-[68%]"}`}>
@@ -155,12 +154,12 @@ export default function EventMap({ events, loading = false, error = null, onRetr
 
         {/* Events in view panel ~32% */}
         {!fullscreen && (
-          <aside className="flex flex-col border-t border-zinc-200 lg:w-[32%] lg:border-l lg:border-t-0">
+          <aside className="flex min-h-0 flex-col border-t border-zinc-200 lg:w-[32%] lg:border-l lg:border-t-0">
             <div className="border-b border-zinc-100 px-4 py-3">
-              <h2 className="text-base font-bold">Events in view</h2>
-              <p className="text-xs text-ink-soft">
-                {listEvents.length} event{listEvents.length === 1 ? "" : "s"}
-                {pinned.length > 0 && ` · ${pinned.length} on map`}
+              <h2 className="text-base font-bold">Matching Events</h2>
+              <p className="text-xs text-ink-soft" role="status">
+                {listEvents.length} matching event{listEvents.length === 1 ? "" : "s"}
+                {` · ${pinned.length} shown on map`}
               </p>
               {(virtualCount > 0 || noCoordCount > 0) && (
                 <p className="mt-1 text-xs text-ink-muted">
@@ -168,16 +167,13 @@ export default function EventMap({ events, loading = false, error = null, onRetr
                   {virtualCount > 0 && noCoordCount > 0 && " · "}
                   {noCoordCount > 0 && (
                     <>
-                      {noCoordCount} without pins —{" "}
-                      <Link href="/gallery" className="font-medium text-pink hover:underline">
-                        Gallery
-                      </Link>
+                      {noCoordCount} not mapped yet — included below
                     </>
                   )}
                 </p>
               )}
             </div>
-            <div ref={listRef} className="flex-1 overflow-y-auto p-3">
+            <div ref={listRef} className="max-h-[65vh] min-h-0 flex-1 overflow-y-auto p-3 lg:max-h-none">
               {listEvents.length === 0 ? (
                 <div className="rounded-xl bg-canvas-soft p-6 text-center">
                   <p className="font-semibold">No events match these filters</p>

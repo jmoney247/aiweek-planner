@@ -53,7 +53,7 @@ export default function EventFiltersBar({
     >
       <div className="flex flex-col gap-3 lg:flex-row lg:items-end lg:gap-2">
         <div className="flex-1">
-          <label htmlFor="event-search" className="sr-only">
+          <label htmlFor="event-search" className="mb-1 block text-sm font-semibold">
             Search events
           </label>
           <input
@@ -115,7 +115,7 @@ export default function EventFiltersBar({
           onChange={(e) => set({ eventType: e.target.value })}
           className={selectClass}
         >
-          <option value="">All types</option>
+          <option value="">Event Type</option>
           {eventTypes.map((t) => (
             <option key={t} value={t}>
               {t}
@@ -132,7 +132,7 @@ export default function EventFiltersBar({
           onChange={(e) => set({ location: e.target.value })}
           className={selectClass}
         >
-          <option value="">All locations</option>
+          <option value="">Location / Neighborhood</option>
           {locations.map((l) => (
             <option key={l} value={l}>
               {l}

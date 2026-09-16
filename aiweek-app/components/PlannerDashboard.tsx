@@ -81,9 +81,7 @@ export default function PlannerDashboard() {
         />
       </div>
 
-      {!loading && !error && <TrendingSection events={trending} />}
-
-      <section id="map" aria-label="Event map" className="mt-8 scroll-mt-24">
+      <section id="map" aria-label="Event map" className="mt-4 scroll-mt-24">
         <EventMap
           events={filtered}
           loading={loading}
@@ -91,6 +89,7 @@ export default function PlannerDashboard() {
           onRetry={() => void load()}
         />
       </section>
+      {!loading && !error && <TrendingSection events={trending} />}
     </div>
   );
 }

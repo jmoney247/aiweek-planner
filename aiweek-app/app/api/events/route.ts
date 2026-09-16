@@ -85,7 +85,7 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     const sb = requireAnonClient();
     let query = sb
       .from("events")
-      .select(EVENT_COLUMNS)
+      .select("*")
       .order("start_at", { ascending: true })
       .order("id", { ascending: true });
 
@@ -127,7 +127,8 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     }
 
     const events = page.map((e) => ({
-      ...e,
+      // Project only public fields; older catalogs may not yet have coordinates.
+      ...Object.fromEntries(EVENT_COLUMNS.split(", ").map((key) => [key, e[key] ?? null])),
       stats: statsById.get(e.id as string) ?? { likes: 0, dislikes: 0, comment_count: 0 },
     }));
 
