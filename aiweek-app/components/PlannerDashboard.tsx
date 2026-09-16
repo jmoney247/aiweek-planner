@@ -70,6 +70,9 @@ export default function PlannerDashboard() {
           )}
         </p>
       </header>
+      <p className="mt-3 max-w-2xl text-base text-ink-soft">
+        Find your people. Discover something new. Save the events you love and make the week your own.
+      </p>
 
       <div className="mt-6">
         <EventFiltersBar

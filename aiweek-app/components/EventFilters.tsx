@@ -106,7 +106,7 @@ export default function EventFiltersBar({
       )}
 
       <div className="mt-3 flex flex-wrap items-center gap-2">
-        <label htmlFor="filter-type" className="sr-only">
+        <label htmlFor="filter-type" className="text-sm font-semibold">
           Event type
         </label>
         <select
@@ -123,7 +123,7 @@ export default function EventFiltersBar({
           ))}
         </select>
 
-        <label htmlFor="filter-location" className="sr-only">
+        <label htmlFor="filter-location" className="text-sm font-semibold">
           Location
         </label>
         <select

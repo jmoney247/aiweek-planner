@@ -37,13 +37,13 @@ function ResizeFix() {
 }
 
 const BOSTON: [number, number] = [42.3601, -71.0589];
-const PINK = "#FF4FA3";
-const HERO = "linear-gradient(135deg,#FF4FA3,#A855F7,#6366F1)";
+const PINK = "#FF8A3D";
+const HERO = "linear-gradient(135deg,#FF8A3D,#FFE2CC,#FFF0B3)";
 
 function pinIcon(selected: boolean, hovered: boolean, live: boolean): L.DivIcon {
   const size = selected || hovered ? 40 : 32;
   const liveDot = live
-    ? `<span style="position:absolute;top:-3px;right:-3px;width:12px;height:12px;border-radius:9999px;background:#22C55E;border:2px solid #fff;"></span>`
+    ? `<span style="position:absolute;top:-3px;right:-3px;width:12px;height:12px;border-radius:9999px;background:#23633E;border:2px solid #fff;"></span>`
     : "";
   return L.divIcon({
     className: "aiweek-pin",
@@ -53,7 +53,7 @@ function pinIcon(selected: boolean, hovered: boolean, live: boolean): L.DivIcon 
       `background:${selected ? HERO : PINK};` +
       `border:3px solid #fff;box-shadow:0 2px 8px rgba(58,24,62,.25);` +
       `display:flex;align-items:center;justify-content:center;` +
-      `${selected ? "outline:3px solid rgba(255,79,163,.45);outline-offset:2px;" : ""}">` +
+      `${selected ? "outline:3px solid rgba(109,59,25,.45);outline-offset:2px;" : ""}">` +
       `<span style="width:10px;height:10px;border-radius:9999px;background:#fff;"></span>` +
       `</div>${liveDot}</div>`,
     iconSize: [size, size],
@@ -66,7 +66,7 @@ function clusterIcon(count: number): L.DivIcon {
     className: "aiweek-cluster",
     html:
       `<div style="width:44px;height:44px;border-radius:9999px;background:${PINK};` +
-      `border:3px solid #fff;box-shadow:0 2px 8px rgba(58,24,62,.25);color:#fff;` +
+      `border:3px solid #fff;box-shadow:0 2px 8px rgba(58,24,62,.25);color:#2D211B;` +
       `font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;">${count}</div>`,
     iconSize: [44, 44],
     iconAnchor: [22, 22],

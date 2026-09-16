@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,17 +6,11 @@
 @import "leaflet/dist/leaflet.css";
 
 :root {
-  --canvas: #fffbfd;
-  --canvas-soft: #fff1f7;
-  --ink: #18181b;
-  --ink-soft: #52525b;
-  --pink: #ff4fa3;
-  --pink-ink: #c2187a;
-  --plum: #3a183e;
-  --lavender: #a78bfa;
-  --success: #22c55e;
-  --hero-gradient: linear-gradient(135deg, #ff4fa3 0%, #a855f7 50%, #6366f1 100%);
-  --accent-gradient: linear-gradient(135deg, #ff4fa3 0%, #a855f7 100%);
+  --plum: #2D211B;
+  --lavender: #FFF0B3;
+  --success: #23633E;
+  --hero-gradient: linear-gradient(135deg, #FFE2CC, #FFF0B3);
+  --accent-gradient: linear-gradient(135deg, #FFE2CC, #FFF8F0);
 }
 
 html,
@@ -36,7 +31,7 @@ html {
 body {
   background: var(--canvas);
   color: var(--ink);
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -67,4 +62,37 @@ body {
 
 .leaflet-container {
   font: inherit;
+}
+
+/* Shared warm design tokens. Legacy class names remain compatible. */
+:root {
+  --canvas: #FFF8F0;
+  --canvas-soft: #FFE2CC;
+  --surface: #FFFFFF;
+  --accent: #FF8A3D;
+  --highlight: #FFF0B3;
+  --ink: #2D211B;
+  --ink-soft: #665044;
+  --pink: #FF8A3D;
+  --pink-ink: #A63D12;
+  --link: #A63D12;
+  --border: #D8C5B6;
+}
+body { font-size: 16px; line-height: 1.6; }
+h1, h2, h3 { font-family: "Plus Jakarta Sans", "DM Sans", sans-serif; line-height: 1.25; }
+:focus-visible { outline: 3px solid var(--link); outline-offset: 3px; }
+::selection { background: var(--highlight); color: var(--ink); }
+.gradient-text { background: none; color: var(--link); }
+.gradient-ring { border: 1px solid var(--border); background: var(--surface); }
+.hero-gradient-bg { background: var(--accent); color: var(--ink); }
+.hero-gradient-bg:hover { background: #F77929; }
+.bg-pink, .bg-primary-bright { color: var(--ink); }
+.text-pink, .text-primary { color: var(--link); }
+[aria-pressed="true"], [aria-current="page"] { font-weight: 700; }
+[aria-current="page"] { text-decoration: underline; text-underline-offset: 5px; }
+button, a, input, select, textarea { transition: background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease; }
+input, select, textarea { font-size: 16px !important; }
+button, select { min-height: 44px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }

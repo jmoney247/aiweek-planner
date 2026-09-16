@@ -56,7 +56,7 @@ function SaveStar({ event }: { event: EventWithStats }) {
 
 const RANK_STYLES = [
   "from-pink/20 to-lavender/20 border-pink/30",
-  "from-lavender/15 to-indigo-100 border-lavender/30",
+  "from-lavender/15 to-canvas-soft border-lavender/30",
   "from-zinc-50 to-canvas-soft border-zinc-200",
 ];
 

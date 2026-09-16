@@ -12,20 +12,20 @@ import type { Event } from "@/lib/types";
 /* ------------------------------------------------------------------ */
 
 const TYPE_STYLE: Record<string, { icon: string; gradient: string }> = {
-  Talk: { icon: "🎤", gradient: "linear-gradient(135deg,#FF4FA3,#A855F7)" },
-  Panel: { icon: "💬", gradient: "linear-gradient(135deg,#A855F7,#6366F1)" },
-  Workshop: { icon: "🛠️", gradient: "linear-gradient(135deg,#FF4FA3,#6366F1)" },
-  Meetup: { icon: "🤝", gradient: "linear-gradient(135deg,#FF4FA3,#A78BFA)" },
-  Conference: { icon: "🎪", gradient: "linear-gradient(135deg,#A855F7,#3A183E)" },
-  Community: { icon: "🌐", gradient: "linear-gradient(135deg,#A78BFA,#6366F1)" },
-  Hackathon: { icon: "💻", gradient: "linear-gradient(135deg,#6366F1,#3A183E)" },
-  Summit: { icon: "🏔️", gradient: "linear-gradient(135deg,#FF4FA3,#3A183E)" },
-  Keynote: { icon: "🎙️", gradient: "linear-gradient(135deg,#FF4FA3,#A855F7)" },
-  Competition: { icon: "🏆", gradient: "linear-gradient(135deg,#FF4FA3,#FCAF45)" },
-  Career: { icon: "💼", gradient: "linear-gradient(135deg,#A855F7,#6366F1)" },
+  Talk: { icon: "🎤", gradient: "linear-gradient(135deg,#FF8A3D,#FFE2CC)" },
+  Panel: { icon: "💬", gradient: "linear-gradient(135deg,#FFE2CC,#FFF0B3)" },
+  Workshop: { icon: "🛠️", gradient: "linear-gradient(135deg,#FF8A3D,#FFF0B3)" },
+  Meetup: { icon: "🤝", gradient: "linear-gradient(135deg,#FF8A3D,#FFF0B3)" },
+  Conference: { icon: "🎪", gradient: "linear-gradient(135deg,#FFE2CC,#2D211B)" },
+  Community: { icon: "🌐", gradient: "linear-gradient(135deg,#FFF0B3,#FFF0B3)" },
+  Hackathon: { icon: "💻", gradient: "linear-gradient(135deg,#FFF0B3,#2D211B)" },
+  Summit: { icon: "🏔️", gradient: "linear-gradient(135deg,#FF8A3D,#2D211B)" },
+  Keynote: { icon: "🎙️", gradient: "linear-gradient(135deg,#FF8A3D,#FFE2CC)" },
+  Competition: { icon: "🏆", gradient: "linear-gradient(135deg,#FF8A3D,#FCAF45)" },
+  Career: { icon: "💼", gradient: "linear-gradient(135deg,#FFE2CC,#FFF0B3)" },
 };
 
-const FALLBACK_STYLE = { icon: "✨", gradient: "linear-gradient(135deg,#FF4FA3,#A855F7)" };
+const FALLBACK_STYLE = { icon: "✨", gradient: "linear-gradient(135deg,#FF8A3D,#FFE2CC)" };
 
 export function CategoryTile({
   eventType,
@@ -81,6 +81,7 @@ export function RegisterButton({ event, className = "" }: { event: Event; classN
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      title="Opens the organizer’s site. Review pricing and registration requirements there before booking."
       className={`inline-flex min-h-[44px] items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold shadow ${
         direct
           ? "hero-gradient-bg text-white hover:opacity-90"
