@@ -45,9 +45,8 @@ export default function SiteFooter() {
         <details className="mt-5 max-w-3xl rounded-2xl border border-stone-200 bg-canvas px-5 py-3">
           <summary className="min-h-[44px] cursor-pointer py-2 text-sm font-semibold text-pink">What inspired this?</summary>
           <div className="space-y-4 pb-3 pt-2 text-base text-ink-soft">
-            <p>I created this because whenever I’m deciding whether to go to an event, I wish I could hear from people who’ve actually been. Was it fun? Was it worth going? What did people like or dislike? And who else is planning to go?</p>
-            <p>I wanted to give people a place to share honest experiences, ask questions, post photos, and help each other decide which events are worth their time.</p>
-            <p className="text-sm">A little inspiration also came from <a className="font-semibold text-pink underline" href="https://x.com/natea" target="_blank" rel="noopener noreferrer">@natea on X</a> and the embedded maps on his website.</p>
+            <p>I built this to help people find events worth going to—through honest comments, photos, and seeing who’s going.</p>
+            <p className="text-sm">Thanks to <a className="font-semibold text-pink underline" href="https://x.com/natea" target="_blank" rel="noopener noreferrer">Nate Aune (@natea)</a>, whose embedded event maps inspired this project.</p>
           </div>
         </details>
 

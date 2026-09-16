@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import L from "leaflet";
+import { markerStyle } from '@/lib/map-marker-style';
 import type { Event } from "@/lib/types";
 import { clusterize, type MapCluster } from '@/lib/map-clusters';
 
@@ -39,41 +40,25 @@ function ResizeFix() {
 }
 
 const BOSTON: [number, number] = [42.3601, -71.0589];
-const PINK = "#FF8A3D";
-const HERO = "linear-gradient(135deg,#FF8A3D,#FFE2CC,#FFF0B3)";
-
 function pinIcon(selected: boolean, hovered: boolean, live: boolean, approximate: boolean): L.DivIcon {
-  const size = selected || hovered ? 48 : 44;
-  const liveDot = live
-    ? `<span style="position:absolute;top:-3px;right:-3px;width:12px;height:12px;border-radius:9999px;background:#23633E;border:2px solid #fff;"></span>`
-    : "";
+  const { size, color, hitSize } = markerStyle(1);
   return L.divIcon({
     className: "aiweek-pin",
-    html:
-      `<div style="position:relative;width:${size}px;height:${size}px;">` +
-      `<div style="width:${size}px;height:${size}px;border-radius:9999px;` +
-      `background:${selected ? HERO : PINK};` +
-      `border:3px ${approximate ? 'dashed' : 'solid'} #fff;box-shadow:0 2px 8px rgba(58,24,62,.25);` +
-      `display:flex;align-items:center;justify-content:center;` +
-      `${selected ? "outline:3px solid rgba(109,59,25,.45);outline-offset:2px;" : ""}">` +
-      `<span style="width:10px;height:10px;border-radius:9999px;background:#fff;"></span>` +
-      `</div>${liveDot}</div>`,
-    iconSize: [size, size],
-    iconAnchor: [size / 2, size / 2],
+    html: `<div style="width:${hitSize}px;height:${hitSize}px;display:flex;align-items:center;justify-content:center;">
+      <span style="box-sizing:border-box;position:relative;width:${size}px;height:${size}px;border-radius:50%;background:${color};border:2px ${approximate ? 'dashed' : 'solid'} white;box-shadow:0 1px 4px #2D211B66;${selected || hovered ? 'outline:3px solid #2D211B;outline-offset:3px;' : ''}">
+      ${live ? '<span style="position:absolute;top:-4px;right:-4px;width:6px;height:6px;border-radius:50%;background:#23633E;border:1px solid white;"></span>' : ''}
+      </span></div>`,
+    iconSize: [hitSize, hitSize], iconAnchor: [hitSize / 2, hitSize / 2],
   });
 }
 
 function clusterIcon(count: number, active = false): L.DivIcon {
-  const size = count >= 10 ? 52 : 44;
+  const { size, color, hitSize } = markerStyle(count);
   return L.divIcon({
     className: "aiweek-cluster",
-    html:
-      `<div style="width:${size}px;height:${size}px;border-radius:9999px;background:${active ? HERO : PINK};` +
-      `${active ? "outline:3px solid #A63D12;outline-offset:2px;" : ""}` +
-      `border:3px solid #fff;box-shadow:0 2px 8px rgba(58,24,62,.25);color:#2D211B;` +
-      `font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;">${count}</div>`,
-    iconSize: [size, size],
-    iconAnchor: [size / 2, size / 2],
+    html: `<div style="width:${hitSize}px;height:${hitSize}px;display:flex;align-items:center;justify-content:center;">
+      <span style="box-sizing:border-box;width:${size}px;height:${size}px;border-radius:50%;background:${color};border:2px solid white;box-shadow:0 2px 5px #2D211B40;color:#2D211B;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;${active ? 'outline:3px solid #2D211B;outline-offset:2px;' : ''}">${count}</span></div>`,
+    iconSize: [hitSize, hitSize], iconAnchor: [hitSize / 2, hitSize / 2],
   });
 }
 

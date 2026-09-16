@@ -17,6 +17,11 @@ export async function GET(req: NextRequest) {
     const offset = Number(sp.get('offset') || 0);
     if (!Number.isSafeInteger(offset) || offset < 0) throw new HttpError(400, 'Invalid page.');
     let query = sb.from('community_feed').select('*');
+    const post = sp.get('post');
+    if (post) {
+      if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(post)) throw new HttpError(400, 'Invalid comment link.');
+      query = query.eq('id', post);
+    }
     if (sp.get('event')) query = query.eq('event_id', sp.get('event'));
     if (sp.get('filter') === 'photos') query = query.neq('photo_paths', '{}');
     if (sp.get('filter') === 'comments') query = query.neq('body', '');

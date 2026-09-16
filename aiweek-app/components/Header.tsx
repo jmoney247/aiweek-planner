@@ -59,9 +59,10 @@ export default function Header() {
             Boston <span className="gradient-text">AI Week</span>
           </span>
         </Link>
-        <nav aria-label="Primary" className="flex items-center gap-1">
-          {link("/#map", "Map", (p) => p === "/")}
-          {link("/gallery", "What people are saying", (p) => p === "/gallery")}
+        <nav aria-label="Primary" className="flex flex-wrap items-center gap-1">
+          {link("/#map", "Map & events", (p) => p === "/")}
+          {link("/gallery", "Gallery", (p) => p === "/gallery")}
+          {link("/comments", "Comments", (p) => p === "/comments")}
           {link("/plan", "My Plan", (p) => p === "/plan")}
         </nav>
       </div>

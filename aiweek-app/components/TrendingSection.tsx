@@ -10,6 +10,7 @@ import {
 import { formatEventDate, formatLocation } from "@/lib/format";
 import { isSaved, onSavedChange, saveEvent, unsaveEvent } from "@/lib/saved";
 import type { EventWithStats } from "@/lib/api";
+import CommunityBar from './CommunityBar';
 
 interface Props {
   events: EventWithStats[];
@@ -70,7 +71,7 @@ export default function TrendingSection({ events }: Props) {
           Trending at <span className="gradient-text">Boston AI Week</span>
         </h2>
         <Link
-          href="/gallery"
+          href="/#map"
           className="text-sm font-semibold text-pink hover:underline"
         >
           See all →
@@ -80,7 +81,6 @@ export default function TrendingSection({ events }: Props) {
         {events.map((e, i) => {
           const title = displayTitle(e);
           const location = formatLocation(e.city, e.neighborhood);
-          const likes = e.stats?.likes ?? 0;
           return (
             <li
               key={e.id}
@@ -104,11 +104,7 @@ export default function TrendingSection({ events }: Props) {
                     📍 {[e.venue, location].filter(Boolean).join(" · ")}
                   </p>
                 )}
-                <p className="mt-2 text-sm text-ink-soft">
-                  <span aria-hidden="true">👍 </span>
-                  <span className="font-semibold text-ink">{likes}</span>
-                  {likes === 1 ? " like" : " likes"}
-                </p>
+                <div className="mt-2"><CommunityBar eventId={e.id} compact /></div>
                 <div className="mt-3 flex items-center gap-2">
                   <RegisterButton event={e} className="flex-1" />
                   <SaveStar event={e} />

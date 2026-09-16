@@ -10,6 +10,7 @@ interface Props {
   eventId: string;
   /** Defer stats loading until the bar scrolls into view (gallery perf). */
   lazy?: boolean;
+  compact?: boolean;
 }
 
 /**
@@ -18,7 +19,7 @@ interface Props {
  * `event_stats` with a 15s poll fallback. Gated actions open the
  * display-name gate when there is no session.
  */
-export default function CommunityBar({ eventId, lazy = true }: Props) {
+export default function CommunityBar({ eventId, lazy = true, compact = false }: Props) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(!lazy);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -46,6 +47,7 @@ export default function CommunityBar({ eventId, lazy = true }: Props) {
       {visible ? (
         <CommunityBarInner
           eventId={eventId}
+          compact={compact}
           onComment={() => setDrawerOpen(true)}
           requireSession={requireSession}
         />
@@ -69,20 +71,22 @@ function CommunityBarInner({
   eventId,
   onComment,
   requireSession,
+  compact,
 }: {
   eventId: string;
   onComment: () => void;
   requireSession: () => Promise<{ id: string; display_name: string } | null>;
+  compact: boolean;
 }) {
   const { stats, myReaction, error, apply } = useEventStats(eventId);
   const [busy, setBusy] = useState(false);
 
   const handleReact = async (kind: ReactionKind) => {
     if (busy) return;
-    const user = await requireSession();
-    if (!user) return; // gate dismissed
     setBusy(true);
     try {
+      const user = await requireSession();
+      if (!user) return;
       // Clicking the active reaction again removes it.
       await apply(myReaction === kind ? null : kind);
     } finally {
@@ -105,21 +109,25 @@ function CommunityBarInner({
         <button
           type="button"
           onClick={() => void handleReact("like")}
+          disabled={busy}
           aria-pressed={myReaction === "like"}
           aria-label={`Like this event, ${stats.likes} likes`}
           className={`${btn} ${myReaction === "like" ? "bg-canvas-soft text-pink" : "text-ink-soft"}`}
         >
           <span aria-hidden="true" className="text-base">👍</span>
+          <span>Like</span>
           <span className="tabular-nums">{stats.likes}</span>
         </button>
         <button
           type="button"
           onClick={() => void handleReact("dislike")}
+          disabled={busy}
           aria-pressed={myReaction === "dislike"}
           aria-label={`Dislike this event, ${stats.dislikes} dislikes`}
           className={`${btn} ${myReaction === "dislike" ? "bg-zinc-200 text-ink" : "text-ink-soft"}`}
         >
           <span aria-hidden="true" className="text-base">👎</span>
+          <span>Dislike</span>
           <span className="tabular-nums">{stats.dislikes}</span>
         </button>
         <button
@@ -132,13 +140,13 @@ function CommunityBarInner({
           <span className="tabular-nums">{stats.comment_count}</span>
           <span>Comments</span>
         </button>
-        <button
+        {!compact && <button
           type="button"
           onClick={() => void handleCommentClick()}
           className="ml-auto inline-flex min-h-[44px] items-center rounded-full px-3 text-sm font-semibold text-pink hover:bg-canvas-soft"
         >
           Write a comment
-        </button>
+        </button>}
       </div>
       {error && (
         <p role="alert" className="mt-1 text-xs text-red-700">

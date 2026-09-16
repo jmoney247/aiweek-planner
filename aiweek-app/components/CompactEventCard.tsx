@@ -9,7 +9,7 @@ import {
 import { formatEventDate, formatLocation } from "@/lib/format";
 import { isSaved, onSavedChange, saveEvent, unsaveEvent } from "@/lib/saved";
 import type { EventWithStats } from "@/lib/api";
-import CommentsDrawer from "@/components/CommentsDrawer";
+import CommunityBar from "@/components/CommunityBar";
 import Link from 'next/link';
 
 interface Props {
@@ -70,86 +70,25 @@ function SaveButton({ event }: { event: EventWithStats }) {
 /**
  * Compact card for the map "Events in view" panel.
  */
-export default function CompactEventCard({
-  event,
-  selected = false,
-  onSelect,
-  onHover,
-}: Props) {
+export default function CompactEventCard({ event, selected = false, onSelect, onHover }: Props) {
   const title = displayTitle(event);
   const location = formatLocation(event.city, event.neighborhood);
-  const likes = event.stats?.likes ?? 0;
-  const [commentsOpen, setCommentsOpen] = useState(false);
-
-  return (
-    <>
-    <article
-      role="button"
-      tabIndex={0}
-      onClick={onSelect}
-      onKeyDown={(e) => {
-        if (e.target !== e.currentTarget) return;
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          onSelect?.();
-        }
-      }}
-      onMouseEnter={() => onHover?.(true)}
-      onMouseLeave={() => onHover?.(false)}
-      onFocus={() => onHover?.(true)}
-      onBlur={() => onHover?.(false)}
-      aria-pressed={selected}
-      className={`flex cursor-pointer gap-3 rounded-2xl border bg-white p-3 shadow-card transition-all ${
-        selected
-          ? "border-pink ring-2 ring-pink/25 shadow-card-hover"
-          : "border-zinc-200/80 hover:border-pink/30 hover:shadow-card-hover"
-      }`}
-    >
+  return <article
+    onMouseEnter={() => onHover?.(true)} onMouseLeave={() => onHover?.(false)}
+    className={`rounded-2xl border bg-white p-3 shadow-card ${selected ? 'border-pink ring-2 ring-pink/25' : 'border-zinc-200/80'}`}>
+    <div className="flex gap-3">
       <EventThumb event={event} />
       <div className="min-w-0 flex-1">
-        <div className="flex items-start justify-between gap-2">
-          <h3 className="line-clamp-2 text-sm font-bold leading-snug">{title}</h3>
-          {event.event_type && (
-            <span className="shrink-0 rounded-full bg-canvas-soft px-2 py-0.5 text-[10px] font-semibold text-plum">
-              {event.event_type}
-            </span>
-          )}
-        </div>
-        <p className="mt-0.5 text-xs text-ink-soft">
-          <time dateTime={event.start_at}>
-            {formatEventDate(event.start_at, event.end_at)}
-          </time>
-        </p>
-        {event.venue && (
-          <p className="mt-0.5 truncate text-xs text-ink-soft">🏠 {event.venue}</p>
-        )}
-        {location && (
-          <p className="truncate text-xs text-ink-muted">📍 {location}</p>
-        )}
+        <h3><button type="button" onClick={onSelect} aria-pressed={selected} className="min-h-[44px] text-left text-sm font-bold leading-snug hover:underline">{title}</button></h3>
+        <p className="text-xs text-ink-soft"><time dateTime={event.start_at}>{formatEventDate(event.start_at, event.end_at)}</time></p>
+        {event.venue && <p className="mt-1 break-words text-xs text-ink-soft">{event.venue}</p>}
+        {location && <p className="text-xs text-ink-soft">{location}</p>}
         {event.location_accuracy === 'approximate' && <p className="text-xs text-ink-soft">Approximate district location</p>}
         {event.lat == null && <p className="text-xs text-ink-soft">Location not mapped yet</p>}
-        <Link onClick={e => e.stopPropagation()} className="inline-flex min-h-[44px] items-center text-sm text-pink underline" href={`/events/${encodeURIComponent(event.id)}`}>Event details</Link>
-        <button
-          type="button"
-          onClick={(e) => { e.stopPropagation(); setCommentsOpen(true); }}
-          aria-label={`Read comments about ${title}`}
-          className="mt-1 inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold text-pink hover:underline"
-        >
-          <span aria-hidden="true">💬</span> {event.stats?.comment_count ?? 0} community posts
-        </button>
-        <div className="mt-2 flex items-center gap-2">
-          <span className="inline-flex items-center gap-1 text-xs text-ink-soft">
-            <span aria-hidden="true">👍</span>
-            <span className="tabular-nums font-medium">{likes}</span>
-          </span>
-          <div className="ml-auto flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
-            <SaveButton event={event} />
-            <RegisterButton event={event} className="!min-h-[44px] !px-3 !py-1 !text-xs" />
-          </div>
-        </div>
+        <Link className="inline-flex min-h-[44px] items-center text-sm text-pink underline" href={`/events/${encodeURIComponent(event.id)}`}>Event details</Link>
       </div>
-    </article>
-    {commentsOpen && <CommentsDrawer eventId={event.id} open={commentsOpen} onClose={() => setCommentsOpen(false)} />}
-    </>
-  );
+    </div>
+    <div className="mt-2 border-t border-stone-100 pt-2"><CommunityBar eventId={event.id} compact /></div>
+    <div className="mt-2 flex items-center justify-end gap-2"><SaveButton event={event} /><RegisterButton event={event} className="!min-h-[44px] !px-3 !text-xs" /></div>
+  </article>;
 }
