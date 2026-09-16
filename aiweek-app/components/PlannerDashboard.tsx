@@ -70,7 +70,7 @@ export default function PlannerDashboard() {
     <div className="mx-auto max-w-7xl px-4 pb-16 pt-6 md:pt-8">
       <header className="text-center md:text-left">
         <h1 className="text-3xl font-extrabold tracking-tight md:text-4xl">
-          Boston <span className="gradient-text">AI Week</span>
+          Where’s the fun happening?
         </h1>
         <p className="mt-2 text-lg text-ink-soft">
           {loading ? (
@@ -85,9 +85,10 @@ export default function PlannerDashboard() {
           )}
         </p>
       </header>
-      <p className="mt-3 max-w-2xl text-base text-ink-soft">
-        Find the event on the map. Hear from the people who are attending
-      </p>
+      <div className="mt-3 space-y-2 text-base text-ink-soft">
+        <p>📣 <Link className="font-bold text-pink underline" href="/comments">HYPE!</Link> — see what people are saying.</p>
+        <p>🗺️ <a className="font-bold text-pink underline" href="#map">Map</a> — see where events are happening.</p>
+      </div>
       <nav aria-label="Explore the planner" className="mt-5 flex flex-wrap gap-3">
         <a href="#map" className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-pink px-4 font-semibold text-ink">🗺️ Map &amp; Events <span aria-hidden="true">↓</span></a>
         <Link href="/comments" className="inline-flex min-h-[44px] items-center rounded-full border border-pink/40 bg-white px-4 font-semibold text-ink">💬 Comments</Link>
