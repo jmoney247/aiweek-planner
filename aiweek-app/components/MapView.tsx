@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { MapContainer, Marker, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import L from "leaflet";
 import type { Event } from "@/lib/types";
 
@@ -30,8 +30,9 @@ function IconFix() {
 function ResizeFix() {
   const map = useMap();
   useEffect(() => {
-    const t = setTimeout(() => map.invalidateSize(), 100);
-    return () => clearTimeout(t);
+    const observer = new ResizeObserver(() => map.invalidateSize());
+    observer.observe(map.getContainer());
+    return () => observer.disconnect();
   }, [map]);
   return null;
 }
@@ -61,15 +62,17 @@ function pinIcon(selected: boolean, hovered: boolean, live: boolean): L.DivIcon 
   });
 }
 
-function clusterIcon(count: number): L.DivIcon {
+function clusterIcon(count: number, active = false): L.DivIcon {
+  const size = count >= 10 ? 52 : 44;
   return L.divIcon({
     className: "aiweek-cluster",
     html:
-      `<div style="width:44px;height:44px;border-radius:9999px;background:${PINK};` +
+      `<div style="width:${size}px;height:${size}px;border-radius:9999px;background:${active ? HERO : PINK};` +
+      `${active ? "outline:3px solid #A63D12;outline-offset:2px;" : ""}` +
       `border:3px solid #fff;box-shadow:0 2px 8px rgba(58,24,62,.25);color:#2D211B;` +
       `font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;">${count}</div>`,
-    iconSize: [44, 44],
-    iconAnchor: [22, 22],
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
   });
 }
 
@@ -91,7 +94,8 @@ function clusterize(events: MappedEvent[], zoom: number): Cluster[] {
   const grid = gridSizeForZoom(zoom);
   const cells = new Map<string, MappedEvent[]>();
   for (const e of events) {
-    const key = grid === null ? `p:${e.id}` : `${Math.round(e.lat / grid)}:${Math.round(e.lng / grid)}`;
+    // Exact coordinates stay grouped even at maximum zoom: no overlapping pins.
+    const key = grid === null ? `venue:${e.lat}:${e.lng}` : `${Math.round(e.lat / grid)}:${Math.round(e.lng / grid)}`;
     const list = cells.get(key) ?? [];
     list.push(e);
     cells.set(key, list);
@@ -129,6 +133,18 @@ function ClusterLayer({
   }, [map]);
 
   const clusters = useMemo(() => clusterize(events, zoom), [events, zoom]);
+  const reduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  useEffect(() => {
+    const selected = events.find((event) => event.id === selectedId);
+    if (selected) map.setView([selected.lat, selected.lng], Math.max(map.getZoom(), 16), { animate: !reduceMotion() });
+  }, [map, selectedId, events]);
+
+  const activateCluster = (cluster: Cluster) => {
+    map.setView([cluster.lat, cluster.lng], Math.min(map.getZoom() + 1, 18), { animate: !reduceMotion() });
+  };
+
+  const sameLocation = (cluster: Cluster) => cluster.events.every((event) => event.lat === cluster.events[0].lat && event.lng === cluster.events[0].lng);
 
   return (
     <>
@@ -149,20 +165,45 @@ function ClusterLayer({
               click: () => onSelect(c.events[0]),
               mouseover: () => onHover(c.events[0].id),
               mouseout: () => onHover(null),
+              keydown: (event) => {
+                if (event.originalEvent.key === " ") {
+                  event.originalEvent.preventDefault();
+                  onSelect(c.events[0]);
+                }
+              },
             }}
           />
         ) : (
           <Marker
             key={c.key}
             position={[c.lat, c.lng]}
-            icon={clusterIcon(c.events.length)}
-            title={`${c.events.length} events — click to zoom in`}
-            alt={`${c.events.length} events clustered — activate to zoom in`}
+            icon={clusterIcon(c.events.length, c.events.some((event) => event.id === selectedId || event.id === hoveredId))}
+            title={`${c.events.length} events — ${sameLocation(c) ? "choose an event" : "activate to zoom in"}`}
+            alt={`${c.events.length} events — ${sameLocation(c) ? "choose an event" : "activate to zoom in"}`}
             keyboard
             eventHandlers={{
-              click: () => map.setView([c.lat, c.lng], Math.min(map.getZoom() + 2, 18)),
+              click: () => { if (!sameLocation(c)) activateCluster(c); },
+              keydown: (event) => {
+                if (event.originalEvent.key === " ") {
+                  event.originalEvent.preventDefault();
+                  if (sameLocation(c)) event.target.openPopup();
+                  else activateCluster(c);
+                }
+              },
             }}
-          />
+          >
+            {sameLocation(c) && <Popup>
+              <p className="font-semibold">{c.events.length} events at this location</p>
+              <ul className="max-h-60 space-y-2 overflow-y-auto">
+                {c.events.map((event) => <li key={event.id}>
+                  <button type="button" onClick={() => { onSelect(event); map.closePopup(); }} className="min-h-[44px] w-full rounded-lg px-2 py-2 text-left font-semibold text-pink hover:bg-canvas-soft">
+                    {event.display_title || event.title}
+                    <span className="block text-xs font-normal text-ink-soft">{new Date(event.start_at).toLocaleString("en-US", { timeZone: "America/New_York", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}</span>
+                  </button>
+                </li>)}
+              </ul>
+            </Popup>}
+          </Marker>
         )
       )}
     </>
@@ -190,6 +231,7 @@ export default function MapView({ events, selectedId, hoveredId, onSelect, onHov
     <MapContainer
       center={BOSTON}
       zoom={13}
+      maxZoom={18}
       scrollWheelZoom
       className="h-full w-full rounded-2xl"
       aria-label="Map of Boston AI Week event locations"

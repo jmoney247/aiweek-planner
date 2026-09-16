@@ -130,6 +130,7 @@ function CommunityBarInner({
         >
           <span aria-hidden="true" className="text-base">💬</span>
           <span className="tabular-nums">{stats.comment_count}</span>
+          <span>Comments</span>
         </button>
         <button
           type="button"

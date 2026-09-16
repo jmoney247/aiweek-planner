@@ -50,8 +50,8 @@ export default function EventMap({ events, loading = false, error = null, onRetr
     let noCoordCount = 0;
     for (const e of events) {
       listEvents.push(e);
-      if (hasCoords(e)) pinned.push(e);
-      else if (isVirtual(e)) virtualCount += 1;
+      if (isVirtual(e)) virtualCount += 1;
+      else if (hasCoords(e)) pinned.push(e);
       else noCoordCount += 1;
     }
     listEvents.sort((a, b) => +new Date(a.start_at) - +new Date(b.start_at));

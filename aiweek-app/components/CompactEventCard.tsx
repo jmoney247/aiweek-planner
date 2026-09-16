@@ -9,6 +9,7 @@ import {
 import { formatEventDate, formatLocation } from "@/lib/format";
 import { isSaved, onSavedChange, saveEvent, unsaveEvent } from "@/lib/saved";
 import type { EventWithStats } from "@/lib/api";
+import CommentsDrawer from "@/components/CommentsDrawer";
 
 interface Props {
   event: EventWithStats;
@@ -77,13 +78,16 @@ export default function CompactEventCard({
   const title = displayTitle(event);
   const location = formatLocation(event.city, event.neighborhood);
   const likes = event.stats?.likes ?? 0;
+  const [commentsOpen, setCommentsOpen] = useState(false);
 
   return (
+    <>
     <article
       role="button"
       tabIndex={0}
       onClick={onSelect}
       onKeyDown={(e) => {
+        if (e.target !== e.currentTarget) return;
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           onSelect?.();
@@ -121,6 +125,14 @@ export default function CompactEventCard({
         {location && (
           <p className="truncate text-xs text-ink-muted">📍 {location}</p>
         )}
+        <button
+          type="button"
+          onClick={(e) => { e.stopPropagation(); setCommentsOpen(true); }}
+          aria-label={`Read comments about ${title}`}
+          className="mt-1 inline-flex min-h-[44px] items-center gap-1 text-sm font-semibold text-pink hover:underline"
+        >
+          <span aria-hidden="true">💬</span> {event.stats?.comment_count ?? 0} comments
+        </button>
         <div className="mt-2 flex items-center gap-2">
           <span className="inline-flex items-center gap-1 text-xs text-ink-soft">
             <span aria-hidden="true">👍</span>
@@ -133,5 +145,7 @@ export default function CompactEventCard({
         </div>
       </div>
     </article>
+    {commentsOpen && <CommentsDrawer eventId={event.id} open={commentsOpen} onClose={() => setCommentsOpen(false)} />}
+    </>
   );
 }

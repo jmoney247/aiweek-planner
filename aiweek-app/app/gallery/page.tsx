@@ -38,6 +38,15 @@ export default function GalleryPage() {
     void load();
   }, [load]);
 
+  useEffect(() => {
+    const showDiscussion = () => {
+      if (window.location.hash === "#community") setSort("most_discussed");
+    };
+    showDiscussion();
+    window.addEventListener("hashchange", showDiscussion);
+    return () => window.removeEventListener("hashchange", showDiscussion);
+  }, []);
+
   const coreWeek = useMemo(() => computeCoreWeekRange(events), [events]);
   const eventTypes = useMemo(() => deriveEventTypes(events), [events]);
   const locations = useMemo(() => deriveLocations(events), [events]);
@@ -57,6 +66,7 @@ export default function GalleryPage() {
           <p className="mt-2 text-ink-soft">
             Browse every Boston AI Week event — react, comment, and save your favorites.
           </p>
+          <p className="mt-2 text-sm text-ink-soft">Read community comments on any event. Ask a question or share your experience with a display name — no email needed.</p>
         </header>
 
         <div className="mt-6 space-y-4">

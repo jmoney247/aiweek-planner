@@ -43,7 +43,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-[60] border-b border-zinc-200/70 bg-canvas/95 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-2 px-4 py-2">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-2">
         <Link
           href="/"
           className="inline-flex min-h-[44px] items-center gap-2"
@@ -62,6 +62,7 @@ export default function Header() {
         <nav aria-label="Primary" className="flex items-center gap-1">
           {link("/#map", "Map", (p) => p === "/")}
           {link("/gallery", "Gallery", (p) => p === "/gallery")}
+          <Link href="/gallery#community" className="inline-flex min-h-[44px] items-center rounded-full px-3 text-sm font-semibold text-ink-soft hover:bg-canvas-soft">Comments</Link>
           {link("/plan", "My Plan", (p) => p === "/plan")}
         </nav>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import EventFiltersBar from "@/components/EventFilters";
 import EventMap from "@/components/EventMap";
 import TrendingSection from "@/components/TrendingSection";
@@ -73,6 +74,11 @@ export default function PlannerDashboard() {
       <p className="mt-3 max-w-2xl text-base text-ink-soft">
         Find your people. Discover something new. Save the events you love and make the week your own.
       </p>
+      <nav aria-label="Explore the planner" className="mt-5 flex flex-wrap gap-3">
+        <a href="#map" className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-pink px-5 font-semibold text-ink">Map &amp; events <span aria-hidden="true">↓</span></a>
+        <Link href="/gallery" className="inline-flex min-h-[44px] items-center rounded-full border border-pink/40 bg-white px-5 font-semibold text-ink">Event gallery</Link>
+        <Link href="/gallery#community" className="inline-flex min-h-[44px] items-center rounded-full border border-pink/40 bg-white px-5 font-semibold text-ink">Community comments</Link>
+      </nav>
 
       <div className="mt-6">
         <EventFiltersBar

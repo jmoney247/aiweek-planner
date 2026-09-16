@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
+import SiteFooter from "@/components/SiteFooter";
 import { SessionGateProvider } from "@/components/SessionGateProvider";
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default function RootLayout({
         <SessionGateProvider>
           <Header />
           {children}
+          <SiteFooter />
         </SessionGateProvider>
       </body>
     </html>
