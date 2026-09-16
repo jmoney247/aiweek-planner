@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Leaflet core styles (imported in globals so every client map gets them). */
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  --canvas: #fffdf8;
+  --ink: #1c1917; /* warm near-black */
+  --ink-soft: #57534e;
+  --primary: #f97316;
+  --primary-ink: #c2570b; /* AA-safe on light backgrounds */
+  --amber: #fcaf45;
+  --coral: #fd5949;
+  --rose: #e1306c;
+  --violet: #833ab4;
+  --deep-orange: #ff6a00;
+  --insta-gradient: linear-gradient(135deg, #fcaf45, #fd5949, #e1306c, #833ab4);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Accessible default focus ring */
+:focus-visible {
+  outline: 2px solid var(--rose);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Selective Instagram-gradient chrome: pill/button borders, section rules. */
+.gradient-text {
+  background: var(--insta-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gradient-ring {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--canvas), var(--canvas)) padding-box,
+    var(--insta-gradient) border-box;
+}
+
+/* Leaflet container needs explicit height from its wrapper. */
+.leaflet-container {
+  font: inherit;
+}
