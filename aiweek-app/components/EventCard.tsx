@@ -153,7 +153,7 @@ function registrationBadge(event: Event): string | null {
 function EventImage({ event }: { event: Event }) {
   const [failed, setFailed] = useState(false);
   const title = displayTitle(event);
-  const className = "h-32 w-full shrink-0";
+  const className = "h-24 w-full shrink-0";
   if (event.image_url && !failed) {
     return (
       <div className={`relative overflow-hidden ${className}`}>
@@ -184,7 +184,7 @@ export default function EventCard({ event }: { event: Event }) {
       className="flex h-full flex-col overflow-hidden rounded-2xl border border-zinc-200/80 bg-white shadow-card transition-shadow hover:shadow-card-hover"
     >
       <EventImage event={event} />
-      <div className="flex flex-1 flex-col p-4">
+      <div className="flex flex-1 flex-col p-3">
         <div className="mb-2 flex flex-wrap items-center gap-2">
           {event.event_type && (
             <span className="rounded-full bg-canvas-soft px-2.5 py-0.5 text-xs font-semibold text-plum">

@@ -101,7 +101,7 @@ function CommunityBarInner({
   };
 
   const btn =
-    "inline-flex min-h-[44px] items-center gap-1.5 rounded-full px-3 text-sm font-medium hover:bg-canvas-soft";
+    "inline-flex min-h-[44px] items-center gap-1.5 rounded-xl border border-stone-300 px-2.5 text-sm font-semibold hover:bg-canvas-soft";
 
   return (
     <div>
@@ -115,7 +115,7 @@ function CommunityBarInner({
           className={`${btn} ${myReaction === "like" ? "bg-canvas-soft text-pink" : "text-ink-soft"}`}
         >
           <span aria-hidden="true" className="text-base">👍</span>
-          <span>Like</span>
+          <span>{myReaction === 'like' ? '✓ Like' : 'Like'}</span>
           <span className="tabular-nums">{stats.likes}</span>
         </button>
         <button
@@ -127,18 +127,18 @@ function CommunityBarInner({
           className={`${btn} ${myReaction === "dislike" ? "bg-zinc-200 text-ink" : "text-ink-soft"}`}
         >
           <span aria-hidden="true" className="text-base">👎</span>
-          <span>Dislike</span>
+          <span>{myReaction === 'dislike' ? '✓ Dislike' : 'Dislike'}</span>
           <span className="tabular-nums">{stats.dislikes}</span>
         </button>
         <button
           type="button"
           onClick={onComment}
           aria-label={`View comments, ${stats.comment_count} comments`}
-          className={`${btn} text-ink-soft`}
+          className={`${btn} bg-canvas-soft text-ink !border-pink`}
         >
           <span aria-hidden="true" className="text-base">💬</span>
           <span className="tabular-nums">{stats.comment_count}</span>
-          <span>Comments</span>
+          <span>Leave a comment</span>
         </button>
         {!compact && <button
           type="button"

@@ -60,9 +60,9 @@ export default function Header() {
           </span>
         </Link>
         <nav aria-label="Primary" className="flex flex-wrap items-center gap-1">
-          {link("/#map", "Map & events", (p) => p === "/")}
+          {link("/#map", "🗺️ Map & Events", (p) => p === "/")}
+          {link("/comments", "💬 Comments", (p) => p === "/comments")}
           {link("/gallery", "Gallery", (p) => p === "/gallery")}
-          {link("/comments", "Comments", (p) => p === "/comments")}
           {link("/plan", "My Plan", (p) => p === "/plan")}
         </nav>
       </div>

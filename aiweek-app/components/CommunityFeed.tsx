@@ -5,6 +5,7 @@ import { communityRequest, type CommunityPost } from '@/lib/community-client';
 import { fetchAllEvents, type EventWithStats } from '@/lib/api';
 import { useSessionGate } from './SessionGateProvider';
 import ProfilePanel from './ProfilePanel';
+import { MAX_PHOTO_BYTES, optimizePhoto, uploadPhoto } from '@/lib/photo-upload';
 
 const control = 'min-h-[44px] rounded-xl border border-stone-300 bg-white px-4 py-2';
 type FeedResponse = { posts: CommunityPost[]; next_offset: number | null };
@@ -20,6 +21,9 @@ export default function CommunityFeed({ eventId, mode = 'comments', postId }: { 
   const [body, setBody] = useState(''); const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]); const [notice, setNotice] = useState('');
   const [composeEvent, setComposeEvent] = useState(eventId ?? '');
+  const [preparing, setPreparing] = useState(false);
+  const [progress, setProgress] = useState<number | null>(null);
+  const uploadedPhotos = useRef(new Map<File, string>());
   const fileInput = useRef<HTMLInputElement>(null);
   useEffect(() => { if (!eventId) fetchAllEvents().then(setEvents).catch(e => setError(e.message)); }, [eventId]);
   useEffect(() => { const urls = files.map(f => URL.createObjectURL(f)); setPreviews(urls); return () => urls.forEach(url => URL.revokeObjectURL(url)); }, [files]);
@@ -38,7 +42,7 @@ export default function CommunityFeed({ eventId, mode = 'comments', postId }: { 
       setRevision(r => r + 1);
     } catch(e) { setError((e as Error).message); } finally { setBusy(null); }
   };
-  return <section id={eventId ? undefined : 'community'} className="space-y-5 scroll-mt-24" aria-label={gallery ? "Gallery" : "Comments"}>
+  return <section id={eventId ? 'event-comments' : 'community'} className={`space-y-4 scroll-mt-24 ${gallery ? '' : 'rounded-2xl border border-pink/30 bg-canvas-soft/60 p-3 md:p-5'}`} aria-label={gallery ? "Gallery" : "Comments"}>
     <header className="flex flex-wrap items-start justify-between gap-4"><div><h2 className="text-2xl font-extrabold md:text-3xl">{gallery ? "Gallery" : "Comments"}</h2><p className="mt-2 text-ink-soft">{gallery ? "Explore photos shared by the community. Each set links back to its original post and event." : "Honest experiences, photos, and questions across events."}</p></div><Link className={`${control} text-pink`} href="/#map">Explore the map</Link></header>
     {!gallery && <ProfilePanel />}
     {gallery && <Link className="inline-flex min-h-[44px] items-center text-pink underline" href="/comments">Read comments or share a photo</Link>}
@@ -49,27 +53,41 @@ export default function CommunityFeed({ eventId, mode = 'comments', postId }: { 
       {!eventId && <label className="flex min-w-0 flex-1 items-center gap-2">Event<select className={`${control} min-w-0 max-w-full flex-1`} value={event} onChange={e => setEvent(e.target.value)}><option value="">All events</option>{events.map(e => <option key={e.id} value={e.id}>{e.display_title || e.title}</option>)}</select></label>}
     </div>}
     {!gallery && <details className="rounded-2xl border bg-white p-5" open={eventId ? true : undefined}>
-      <summary className="min-h-[44px] cursor-pointer font-bold">Been here? Share your experience and add a photo.</summary>
+      <summary className="min-h-[44px] cursor-pointer rounded-xl bg-canvas-soft p-3 font-bold">💬 Been to this event? Share what you thought.</summary>
       <form className="mt-3 space-y-3" onSubmit={async e => {
         e.preventDefault(); setBusy('post'); setNotice('');
         try {
           if (!await requireSession()) return;
-          const form = new FormData(); form.set('event_id', composeEvent); form.set('body', body); files.forEach(file => form.append('photos', file));
+          const form = new FormData(); form.set('event_id', composeEvent); form.set('body', body);
+          setProgress(files.length ? 0 : null);
+          for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            let path = uploadedPhotos.current.get(file);
+            if (!path) {
+              path = await uploadPhoto(file, value => setProgress(Math.round((i * 100 + value) / files.length)));
+              uploadedPhotos.current.set(file, path);
+            }
+            form.append('photo_paths', path);
+          }
           await communityRequest('/api/community', { method: 'POST', body: form });
-          setBody(''); setFiles([]); if (fileInput.current) fileInput.current.value = '';
+          setBody(''); setFiles([]); uploadedPhotos.current.clear(); if (fileInput.current) fileInput.current.value = '';
           setNotice('Thanks—your experience has been posted.'); setFilter('all'); setSort('newest'); setEvent(''); setRevision(r => r + 1);
-        } catch(e) { setNotice((e as Error).message); } finally { setBusy(null); }
+        } catch(e) { setNotice((e as Error).message); } finally { setBusy(null); setProgress(null); }
       }}>
         {!eventId && <label className="block">Which event?<select required className={`${control} mt-1 block w-full`} value={composeEvent} onChange={e => setComposeEvent(e.target.value)}><option value="">Choose an event</option>{events.map(e => <option key={e.id} value={e.id}>{e.display_title || e.title}</option>)}</select></label>}
         <label className="block font-semibold">Your experience<textarea className="mt-2 block w-full rounded-xl border p-3 font-normal" rows={4} maxLength={2000} value={body} onChange={e => setBody(e.target.value)} placeholder="What did you like? What could have been better? Would you recommend going?" /></label>
-        <label className="block">Add photos<input ref={fileInput} className="mt-2 block max-w-full" type="file" accept="image/jpeg,image/png,image/webp" multiple onChange={e => {
-          const chosen = [...files, ...Array.from(e.target.files ?? [])];
-          if (chosen.length > 3 || chosen.some(f => f.size > 1048576 || !['image/jpeg','image/png','image/webp'].includes(f.type))) { setNotice('Choose up to 3 JPEG, PNG or WebP photos, under 1 MB each.'); e.target.value = ''; return; }
-          setFiles(chosen); setNotice(''); e.target.value = '';
+        <label className="block">Add photos<input ref={fileInput} disabled={preparing || !!busy} className="mt-2 block max-w-full" type="file" accept="image/*" multiple onChange={async e => {
+          const chosen = Array.from(e.target.files ?? []); e.target.value = '';
+          if (files.length + chosen.length > 3 || chosen.some(f => f.size > MAX_PHOTO_BYTES)) { setNotice('Choose up to 3 photos, no larger than 15 MB each.'); return; }
+          setPreparing(true); setNotice('Preparing your photos…');
+          try { const optimized: File[] = []; for (const photo of chosen) optimized.push(await optimizePhoto(photo)); setFiles(current => [...current, ...optimized]); setNotice('Photos ready—resized and optimized for the gallery.'); }
+          catch (error) { setNotice((error as Error).message); }
+          finally { setPreparing(false); }
         }} /></label>
-        <p className="text-sm text-ink-soft">Text, photos, or both. Up to 3 photos, under 1 MB each. Only upload photos you have permission to share. Posts are public; don’t include personal or sensitive information.</p>
-        <div className="flex flex-wrap gap-3">{previews.map((url,i) => <div key={url}><img src={url} alt={`Selected photo ${i+1}`} className="h-24 w-24 rounded-xl object-cover" /><button type="button" className="min-h-[44px] text-sm underline" onClick={() => setFiles(files.filter((_,j) => i !== j))}>Remove photo {i+1}</button></div>)}</div>
-        <button disabled={!!busy || (!body.trim() && !files.length)} className={`${control} !bg-pink font-bold disabled:opacity-50`}>{busy === 'post' ? 'Posting…' : 'Share experience'}</button>
+        <p className="text-sm text-ink-soft">Up to 3 photos, 15 MB each. We resize to at most 2000 px and compress before uploading. Uploads retry automatically if your connection drops; keep this page open. Only share photos you have permission to post. Posts are public.</p>
+        <div className="flex flex-wrap gap-3">{previews.map((url,i) => <div key={url}><img src={url} alt={`Selected photo ${i+1}`} className="h-24 w-24 rounded-xl object-cover" /><button disabled={!!busy || preparing} type="button" className="min-h-[44px] text-sm underline" onClick={() => setFiles(files.filter((_,j) => i !== j))}>Remove photo {i+1}</button></div>)}</div>
+        {progress !== null && <div role="status"><label className="block">Uploading photos: {progress}%<progress className="block w-full" max={100} value={progress} /></label>{progress === 100 && <p>Saving your comment…</p>}</div>}
+        <button disabled={preparing || !!busy || (!body.trim() && !files.length)} className={`${control} !bg-pink font-bold disabled:opacity-50`}>{busy === 'post' ? 'Posting…' : 'Post comment'}</button>
         {notice && <p role="status">{notice}</p>}
       </form>
     </details>}
@@ -77,16 +95,16 @@ export default function CommunityFeed({ eventId, mode = 'comments', postId }: { 
     {loading && <p role="status">Loading community posts…</p>}
     {error && <div role="alert" className="rounded-xl border bg-white p-4">{error} <button className="min-h-[44px] underline" onClick={() => setRevision(r => r+1)}>Try again</button></div>}
     {!loading && !error && !posts.length && <p className="rounded-2xl bg-white p-6">No posts match yet. Be the first to share an experience.</p>}
-    <div className="grid items-start gap-5 md:grid-cols-2">{posts.map(post => <article key={post.id} id={`post-${post.id}`} className="min-w-0 space-y-3 rounded-2xl border bg-white p-5 shadow-sm">
+    <div className={`grid items-start gap-3 md:grid-cols-2 ${gallery ? 'xl:grid-cols-3' : ''}`}>{posts.map(post => <article key={post.id} id={`post-${post.id}`} className="min-w-0 space-y-2 rounded-2xl border bg-white p-3 shadow-sm">
       <div><p className="font-bold">{post.display_name}</p><time className="text-sm text-ink-soft" dateTime={post.created_at}>{new Date(post.created_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}</time></div>
       {!eventId && <Link className="block font-semibold text-pink underline" href={`/events/${encodeURIComponent(post.event_id)}`}>{post.event_title}</Link>}
       {!gallery && post.body && <p className="whitespace-pre-wrap break-words">{post.body}</p>}
       {post.parent_id && <p className="text-xs text-ink-soft">A reply in this event’s discussion.</p>}
       {post.photos.length > 0 && <div className="grid gap-2">{post.photos.map((url,i) => <a key={url} href={url} target="_blank" rel="noopener noreferrer"><img className="max-h-96 w-full rounded-xl object-contain" loading="lazy" src={url} alt={`Photo ${i+1} shared by ${post.display_name} about ${post.event_title}`} /></a>)}</div>}
       {gallery && <Link className="inline-flex min-h-[44px] items-center text-pink underline" href={`/comments?post=${encodeURIComponent(post.id)}`}>View original comment</Link>}
-      {!gallery && <div className="flex flex-wrap gap-2">{(['like','dislike'] as const).map(choice => <button disabled={!!busy} aria-pressed={post.reaction === choice} className={`${control} ${post.reaction === choice ? '!bg-pink font-bold' : ''}`} key={choice} onClick={() => void react(post, choice)}>{post.reaction === choice ? '✓ ' : ''}{choice === 'like' ? 'Like' : 'Dislike'} · {choice === 'like' ? post.likes : post.dislikes}</button>)}</div>}
+      {!gallery && <div className="flex flex-wrap gap-2">{(['like','dislike'] as const).map(choice => <button disabled={!!busy} aria-pressed={post.reaction === choice} className={`${control} font-semibold ${post.reaction === choice ? '!bg-pink font-bold !border-ink' : ''}`} key={choice} onClick={() => void react(post, choice)}>{post.reaction === choice ? '✓ ' : ''}{choice === 'like' ? '👍 Like' : '👎 Dislike'} · {choice === 'like' ? post.likes : post.dislikes}</button>)}</div>}
       <Link className="inline-flex min-h-[44px] items-center text-pink underline" href={`/?event=${encodeURIComponent(post.event_id)}#map`}>View on map</Link>
-      {!gallery && <><details><summary className="min-h-[44px] cursor-pointer py-2 text-sm underline">Reply</summary><form className="space-y-2" onSubmit={async e => { e.preventDefault(); const formElement = e.currentTarget; const reply = new FormData(formElement); reply.set('event_id', post.event_id); reply.set('parent_id', post.id); setBusy(post.id); try { if (!await requireSession()) return; await communityRequest('/api/community',{method:'POST',body:reply}); setRevision(r=>r+1); } catch(e) { setError((e as Error).message); } finally { setBusy(null); } }}><label className="block text-sm">Your reply<textarea required maxLength={2000} name="body" className="mt-1 block w-full rounded-xl border p-3" /></label><button disabled={!!busy} className={control}>Post reply</button></form></details>
+{!gallery && <><details><summary className="min-h-[44px] cursor-pointer rounded-xl border border-pink bg-canvas-soft px-3 py-3 text-sm font-bold">💬 Comment · {post.reply_count}</summary><Link className="inline-flex min-h-[44px] items-center underline" href={`/events/${encodeURIComponent(post.event_id)}#event-comments`}>Read this event’s discussion</Link><form className="space-y-2" onSubmit={async e => { e.preventDefault(); const formElement = e.currentTarget; const reply = new FormData(formElement); reply.set('event_id', post.event_id); reply.set('parent_id', post.id); setBusy(post.id); try { if (!await requireSession()) return; await communityRequest('/api/community',{method:'POST',body:reply}); formElement.reset(); setRevision(r=>r+1); } catch(e) { setError((e as Error).message); } finally { setBusy(null); } }}><label className="block text-sm">Your reply<textarea required maxLength={2000} name="body" className="mt-1 block w-full rounded-xl border p-3" /></label><button disabled={!!busy} className={control}>Post reply</button></form></details>
       {post.is_mine && <details><summary className="min-h-[44px] cursor-pointer py-2 text-sm underline">Edit text</summary><form className="space-y-2" onSubmit={async e=>{e.preventDefault();const form=new FormData(e.currentTarget);setBusy(post.id);try{await communityRequest(`/api/comments/${post.id}`,{method:'PATCH',headers:{'content-type':'application/json'},body:JSON.stringify({body:form.get('body')})});setRevision(r=>r+1);}catch(e){setError((e as Error).message);}finally{setBusy(null);}}}><label className="block text-sm">Post text<textarea required maxLength={2000} name="body" defaultValue={post.body} className="mt-1 block w-full rounded-xl border p-3" /></label><button disabled={!!busy} className={control}>Save text</button></form></details>}
       <div className="flex gap-4 text-sm"><button disabled={!!busy} className="min-h-[44px] underline" onClick={async () => { setBusy(post.id); try { if (!await requireSession()) return; await communityRequest('/api/reports', { method: 'POST', headers: { 'content-type':'application/json' }, body: JSON.stringify({ target_type: 'comment', target_id: post.id, reason: 'Reported from community feed' }) }); setNotice('Report sent for review.'); } catch(e) { setError((e as Error).message); } finally { setBusy(null); } }}>Report post</button>
       {post.is_mine && <button className="min-h-[44px] underline" disabled={!!busy} onClick={async () => { if (!window.confirm('Remove your post from the community?')) return; setBusy(post.id); try { await communityRequest(`/api/comments/${post.id}`, { method:'DELETE' }); setRevision(r => r+1); } catch(e) { setError((e as Error).message); } finally { setBusy(null); } }}>Delete my post</button>}</div>

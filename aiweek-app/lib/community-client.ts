@@ -9,4 +9,5 @@ export interface CommunityPost {
   body: string; photos: string[]; created_at: string; likes: number; dislikes: number;
   reaction: 'like' | 'dislike' | null; is_mine: boolean;
   parent_id: string | null;
+  reply_count: number;
 }

@@ -89,9 +89,9 @@ export default function PlannerDashboard() {
         Find the event on the map. Hear from the people who are attending
       </p>
       <nav aria-label="Explore the planner" className="mt-5 flex flex-wrap gap-3">
-        <a href="#map" className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-pink px-5 font-semibold text-ink">Map &amp; events <span aria-hidden="true">↓</span></a>
+        <a href="#map" className="inline-flex min-h-[44px] items-center gap-2 rounded-full bg-pink px-4 font-semibold text-ink">🗺️ Map &amp; Events <span aria-hidden="true">↓</span></a>
+        <Link href="/comments" className="inline-flex min-h-[44px] items-center rounded-full border border-pink/40 bg-white px-4 font-semibold text-ink">💬 Comments</Link>
         <Link href="/gallery" className="inline-flex min-h-[44px] items-center rounded-full border border-pink/40 bg-white px-5 font-semibold text-ink">Gallery</Link>
-        <Link href="/comments" className="inline-flex min-h-[44px] items-center rounded-full border border-pink/40 bg-white px-5 font-semibold text-ink">Comments</Link>
       </nav>
 
       <div className="mt-6">
